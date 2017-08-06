@@ -20,6 +20,7 @@ permalink: /posts/:title
 defaults:
   - values:
       layout: "default"
+      comments: true
 
 socialmedia:
   facebook: whi.kwon
