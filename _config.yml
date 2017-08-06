@@ -18,10 +18,7 @@ links:
 
 permalink: /posts/:title
 defaults:
-  - scope:
-      path: ''
-      type: 'posts'
-    values:
+  - values:
       layout: "default"
       comments: true
 
