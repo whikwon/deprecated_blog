@@ -33,8 +33,7 @@
               {% endif %}
               {{ page.title }}
 
-			        {% include comments.html %}
-			        {% endif %}
+
             </h1>
             {% if is_post and site.share %}
               <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
@@ -55,4 +54,7 @@
       <img src="{{ site.url }}/images/scribble2.png" alt="scribble" class="mt4 db center" />
     </footer>
   </body>
+  {% if page.comments == true %}
+  {% include comments.html %}
+  {% endif %}
 </html>
