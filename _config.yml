@@ -15,6 +15,7 @@ links:
     url:          /about
     external:     false
 # ------------ CONFIGURABLE END ------------
+markdown: kramdown
 
 permalink: /posts/:title
 defaults:
