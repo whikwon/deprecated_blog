@@ -1,5 +1,6 @@
 ---
 title:  "Batch Normalization"
+date: 2017-07-17 00:00:00
 comments: true
 ---
 - 2015년 ICML 2015에 publish된 논문이다.
