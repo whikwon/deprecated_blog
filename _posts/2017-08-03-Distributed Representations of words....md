@@ -34,7 +34,7 @@ Noise Contrastive Estimation(NCE)에서 출발한 개념으로 NCE는 좋은 모
 data from noise by means of logistic regression* 해야 한다고 가정하고 있다.
 그렇게 나온 Negative Sampling의 objective function은 아래와 같다.
 $$log\ \sigma({v'_{w_O}}^T v_{w_I}) + \sum_{i=1}^k \mathbb{E}_{w_i} \sim P_n(w)[log\ \sigma(-{v'_{w_i}}^Tv_{w_I})]$$ <br>
-(k : #\ of\ negative\ samples) <br>
+$$(k : #\ of\ negative\ samples)$$ <br>
 기존 Skip-gram 모델의 Objective function을 대체하는 이 식을 보자.
 먼저 input data(center word)에 대해서 target word를 포함 추가 k개의 오답(negative sample)을 $$P_n(w)$$의 확률로 sampling한다.
 maximize하는게 목적이므로 target word가 될 확률($$\sigma({v'_{w_O}}^T v_{w_I})$$)을 최대로 하면서
