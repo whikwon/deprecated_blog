@@ -41,7 +41,7 @@ maximize하는게 목적이므로 target word가 될 확률($$\sigma({v'_{w_O}}^
 negative word들의 확률 값에 샘플링 확률을 곱한 값을 최소로 갖는 $$v',v$$를 찾게 된다.
 결국 앞선 식이랑 비교했을 때 굳이 negative 값들을 전부 확인 할 필요 없이 몇 개만 확인하자는 게
 주요 내용이다.
-negative word의 샘플링 확률은 $$P(w_i) = {{f(w_i)^{3/4}} \above 1pt {\sum_{j=0}^n(f(w_j)^{3/4})}}$$ 로,
+negative word의 샘플링 확률은 $$P(w_i) = {f(w_i)^{3/4} \above 1pt {\sum_{j=0}^n f(w_j)^{3/4}}}$$ 로,
 전체 단어 중에 얼마나 있는지 고려해서 뽑히게 된다. 위 식에서 $$3/4$$승은 empirical한 값으로 성능이 가장 좋다고 한다.
 
 #### 2.3 Subsampling of Frequent Words <br>
