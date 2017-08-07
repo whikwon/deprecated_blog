@@ -6,7 +6,7 @@ comments: true
 
 - GoogleNet은 Google에서 발표한 2014년도에 ILSVRC에서 1등을 차지한 모델이다.  
 - 아래 내용은 Going Deeper with Convolution 논문을 읽은 뒤에 요약 및 정리한 것이다.
-- 다른 모델들에서 가져온 컨셉들, 후에 개선을 위해 변경한 점들은 지속 업데이트 예정이다.
+- 다른 모델m들에서 가져온 컨셉들, 후에 개선을 위해 변경한 점들은 지속 업데이트 예정이다.
 
 #### 1. Introduction <br>
 핵심적으로 이 논문에서 언급하는 내용은 **inception layer** 의 도입으로 쌓이는 layer

@@ -1,5 +1,6 @@
 ---
 title:  "Decoupled Neural Interfaces using Synthetic Gradients"
+date: 2017-07-18 00:00:00
 comments: true
 ---
 - 2016년에 DeepMind에서 발표한 논문이다.

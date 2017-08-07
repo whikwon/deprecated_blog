@@ -1,5 +1,6 @@
 ---
 title:  "Efficient Estimation of Word Representations in Vector Space"
+date: 2017-08-04 00:00:00
 comments: true
 ---
 

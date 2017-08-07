@@ -1,5 +1,6 @@
 ---
 title:  "Distributed Representations of Words and phrases and their Compositionality"
+date: 2017-08-03 00:00:00
 comments: true
 ---
 
