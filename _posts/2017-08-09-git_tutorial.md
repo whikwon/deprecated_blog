@@ -31,7 +31,6 @@ comments: true
 **git revert** :
 **git 명령어 --help** : 명령어에 해당되는 도움말 확인
 
-
 git commit 전에는 항상 git add가 와야한다. 파일 하나 하나에 대해서 선택적으로 변경사항에 대해
 commit해야 할 필요성이 있기 때문이다. (기존 버전 관리 시스템과 차별화된 점이라고 한다.)
 
@@ -46,15 +45,35 @@ reset은 협업 시에 절대 사용하면 안 된다.
 
 ***
 git의 원리
-1. 폴더 내 변경 점은 add 전에는 git에 아무런 영향을 주지 않는다.
-2. 변경점을 add할 시에 object폴더 내 파일을 바라보게 하는 index가 생성되고 값은 object에 저장된다.
-index의 앞의 두 글자가 object내 폴더명, 나머지가 파일명이 된다.
-3. 같은 값들은 하나의 object에 저장되게 되고 서로 다른 파일들에 같은 변경점이 add될 경우
-이들은 모두 같은 index를 갖게 된다. (중복에 대한 비효율을 막기 위함.)
-4. sha1라는 메커니즘을 통해서 hash값을 얻는다. 그럼 같은 값에 대해 동일한 index를 얻을 수 있다.  
+1. git add
+  - 폴더 내 변경 점은 add 전에는 git에 아무런 영향을 주지 않는다.
+  - 변경점을 add할 시에 object폴더 내 파일을 바라보게 하는 index가 생성되고 파일의 값은 object에 저장된다.
+  index의 두 글자가 object내 폴더명, 나머지가 파일명이 된다.
+  - 같은 파일의 값들은 하나의 object에 저장되게 되어 같은 내용의 파일은 모두 같은 index를 갖게 된다.
+  (중복에 대한 비효율을 막기 위함.)
+  - 상세한 원리는 sha1라는 알고리즘(?)을 통해서 hash값을 얻는 방법이라고 한다.
+  *※ 의문점 : 같은 파일에 대한 index를 준다고 해도, 서로 중복되는 파일이 왠만하면 없을텐데? 흠..*
 
+2. git commit
+  - commit시에 object폴더 내 파일이 생성되고 파일 내에 작성자, comitter 정보 외에 tree라는
+  정보가 추가적으로 들어가고 link가 걸리는데, 그 안에는 업데이트할 당시의 파일의 이름과 내용이 있다.
+  (현재 상태를 사진찍는 것) 또한, 추가적으로 parent에 해당되는 commit의 정보도 줘서 이전 commit으로
+  연결될 수 있게 한다.
+  - object 파일의 구성
+    - blob : 파일의 내용을 가짐 (코드)
+    - tree : 파일명, blob의 정보를 가짐 (해당 상태의 blob 모임)
+    - commit : commit에 대한 정보를 가짐 (commit 내용, 작성자, tree, parent)
 
+3. git status
+  - 현재 index값과 현재 파일의 hash값을 비교했을 때 다르면 add할게 있다는 뜻이다. (**Changes not staged
+  for commit**)
+  - add하면 index와 object가 생성된다. index와 현재 파일의 hash값이 같다. (**Changes to be commited**)
+  - 최신 commit의 tree와 현재 index를 비교해서 같지 않으면 commit할게 있다는 뜻이다.
+  ***파일 - index, tree - index 두 조건 비교를 통해서 현재 상황을 파악하는 거네***
 
+git 내에서 이루어지는 활동을 도식화해놓은 그림은 아래와 같다.
+![Git Data Transport Commands](https://onezeronull.com/files/2016/06/Git-data-transport-commands.png)
+<Git Data Transport Commands : https://onezeronull.com/2015/04/10/git-diagram-for-data-transport-commands/>
 
 Reference: <br>
 [생활코딩 - 지옥에서 온 Git](https://opentutorials.org/course/2708)
