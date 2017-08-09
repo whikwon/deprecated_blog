@@ -12,9 +12,9 @@ comments: true
   - vim 1.txt : 1.txt를 생성한다. i를 누르면 입력 가능.
   - cat 1.txt : 1.txt 내용 확인.
 
+***
 **Git 명령어**
 
-***
 1. **git init** : 현재 작업 폴더를 git 작업 폴더로 만들어주면서 .git 폴더를 생성하며 해당 폴더에 버전
 관련 정보가 누적되게 된다.
 
@@ -31,6 +31,7 @@ comments: true
   - -m : message를 editor를 안 키고 업데이트하겠다.
   - -am : 위 2개를 합친 내용
 
+
 7. **git log** : 버전 업데이트 상황 확인한다.
   - -p : 이전 commit과의 변경점을 보여준다.
   - *loginfo* : loginfo에 해당되는 commit의 변경점을 보여준다.
@@ -42,7 +43,9 @@ comments: true
   - *loginfo* --hard : loginfo이 후의 버전을 삭제하고 해당 loginfo단계로 돌아간다.
 
 10. **git revert** : 스킵
+
 11. **git 명령어 --help** : 명령어에 해당되는 도움말 확인
+
 
 git commit 전에는 항상 git add가 와야한다. 파일 하나 하나에 대해서 선택적으로 변경사항에 대해
 commit해야 할 필요성이 있기 때문이다. (기존 버전 관리 시스템과 차별화된 점이라고 한다.)
