@@ -11,6 +11,7 @@ comments: true
   - clear : 지난 입력/출력 내용을 다 지운다.
   - vim 1.txt : 1.txt를 생성한다. i를 누르면 입력 가능.
   - cat 1.txt : 1.txt 내용 확인.
+
 **git init** : 현재 작업 폴더를 git 작업 폴더로 만들어주면서 .git 폴더를 생성하며 해당 폴더에 버전
 관련 정보가 누적되게 된다.
 **git status** : 현재 상태 확인
@@ -21,13 +22,17 @@ comments: true
   - -a : add를 자동으로 한다.
   - -m : message를 editor를 안 키고 업데이트하겠다.
   - -am : 위 2개를 합친 내용
+
 **git log** : 버전 업데이트 상황 확인한다.
   - -p : 이전 commit과의 변경점을 보여준다.
   - *loginfo* : loginfo에 해당되는 commit의 변경점을 보여준다.
+
 **git diff** : 현재 작업에 대한 변경점을 보여준다. (commit 전, add시 사라짐)
   - *loginfo1*..*loginfo2* : log1과 log2의 commit을 비교해서 나타내준다.  
+
 **git reset** :
   - *loginfo* --hard : loginfo이 후의 버전을 삭제하고 해당 loginfo단계로 돌아간다.
+
 **git revert** :
 **git 명령어 --help** : 명령어에 해당되는 도움말 확인
 
@@ -71,9 +76,9 @@ git의 원리
   - 최신 commit의 tree와 현재 index를 비교해서 같지 않으면 commit할게 있다는 뜻이다.
   ***파일 - index, tree - index 두 조건 비교를 통해서 현재 상황을 파악하는 거네***
 
-git 내에서 이루어지는 활동을 도식화해놓은 그림은 아래와 같다.
+git 내에서 이루어지는 활동을 도식화해놓은 그림은 아래와 같다. <br><br>
 ![Git Data Transport Commands](https://onezeronull.com/files/2016/06/Git-data-transport-commands.png)
-<Git Data Transport Commands : https://onezeronull.com/2015/04/10/git-diagram-for-data-transport-commands/>
 
 Reference: <br>
 [생활코딩 - 지옥에서 온 Git](https://opentutorials.org/course/2708)
+Git 데이터 흐름 이미지 : https://onezeronull.com/2015/04/10/git-diagram-for-data-transport-commands/
