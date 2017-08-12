@@ -17,7 +17,7 @@ back propagation을 통해 각각의 weight의 gradient를 update해주어야 �
 핵심 내용은 $$h_i, x_i, y_i, \theta_i$$에 dependent하던 BProp식을 $$h_i$$에만 dependent하다고 가정하는 것이다.<br><br>
 $$\frac {\partial L} {\partial \theta_i} = f_Bprop((h_i, x_i, y_i, \theta_i),...) \frac {\partial h_i} {\partial \theta_i} \simeq \hat f_Bprop(h_i) \frac {\partial h_i} {\partial \theta_i}$$ <br>
 ($$h:activation, \ x:input, \ y: supervision, \ L: loss$$) <br><br>
-그럴 경우 위 식은 $h_i$에만 dependent한 식이 되어 각 layer을 지날 때 Bprop을 통해 해당 layer의 gradient를 구해 즉시 update를 할 수 있게 된다.
+그럴 경우 위 식은 $$h_i$$에만 dependent한 식이 되어 각 layer을 지날 때 Bprop을 통해 해당 layer의 gradient를 구해 즉시 update를 할 수 있게 된다.
 뒤에서 RNN에의 적용 예제를 보면서 어떤 방식으로 적용되는 지 살펴보겠다.
 
 #### 2. Decoupled Neural Interfaces
