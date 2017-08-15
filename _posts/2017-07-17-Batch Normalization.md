@@ -5,6 +5,7 @@ comments: true
 ---
 - 2015년 ICML 2015에 publish된 논문이다.
 
+***
 #### 1. introduction <br>
 Deep learning에서 모델을 학습시킬 때 parallelism의 효율성을 살리기 위해 training시
 batch 대신 Stochastic Gradient Descent(SGD)를 사용한다.
@@ -21,7 +22,6 @@ vanishing gradient에 의해 $$x$$가 saturated regime으로 이동하게 된다
 그래서 이런 nonlinearity input의 분포를 안정되게 해줄 수 있으면 optimizer가 saturated regime에 빠질 일도
 드물 것이고 training도 빨라질 것이라는게 논문의 주된 내용이다.
 
-2.
 
 
 Reference: <br>

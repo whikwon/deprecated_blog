@@ -6,6 +6,36 @@ comments: true
 
 - image detection의 대표적인 모델인 R-CNN부터 Mask R-CNN까지의 흐름에 대해서 정리하도록 하겠다.
 
+먼저, image detection을 제외한 다른 vision 분야에서 연구되는 주제에 대해서 소개하도록 하겠다. <br>
+방법에 따라 아래와 같이 4가지로 구분되어 나누어진다. <br>
+![Vision tasks](https://whikwon.github.io/images/vision_tasks.PNG) <br> <br>
+1. Semantic Segmentation  <br>
+image내 pixel들이 어떤 class를 나타내는지 찾는 방법이다.
+주로 학습에 사용되는 방법은 **Fully Convolutional로 transpose convolution** 을 사용한 up/down sampling으로
+각 pixel에 대한 classification을 수행한다. label data는 당연히 pixel별로 classify된 data를 사용한다.
+
+2. Classification + Localization  <br>
+image내 **특정 object** 가 어느 위치에 있는지 확인하는 방법이다. <br>
+기본적인 학습 방법은 Bounding-Box에 대한 loss를 구하고 image에 대한 classify loss를 구해서
+이 둘을 weighted sum한 total loss를 objective function으로 두고 학습을 진행하는 방식이다.
+image내 기본적인 box가 존재하고, class할 object의 수도 주어지므로 이어지는 object detection의
+쉬운 방식이라고 보면 되겠다. 이 방식을 통해 Human pose estimation이 가능하다.
+
+3. Object detection  <br>
+**몇 개의 object가 image내에 있는지 주어지지 않은 상태** 에서 각각의 object에 대한 위치와 class를 확인하는 방법이다.
+classfication과 마찬가지로 computer vision 관련 가장 큰 task라고 보면 되겠다. 방법은 image를 ***많은 crop들로 나눈 다음에
+이에 대해 개별적으로 classification을 수행한다.*** training시에 위 2번 방식과 동일하게 classification + Bounding-Box을
+고려해서 많은 crop들에 대해 학습해야 하므로 매우 까다롭고 복잡하다. <br>
+방식은 크게 2가지로 나뉘는데 첫번째는 **Region based method** 로 R-CNN, Fast-R-CNN, Faster-R-CNN, Mask-R-CNN 등이 포함된다.
+두번째는 **proposal없이 진행되는 모델** 들로 대표적으로 YOLO와 SSD가 있다.
+
+4. Instance Segmentation <br>
+위의 내용들을 대부분 합친 내용이라고 보면 된다.
+image내 많은 object들에 대해서 classification을 수행하고 각각의 object가 차지하는 pixel의 범위를 찾는 방법이다.
+Mask-R-CNN이 최근에 나온 대표적인 모델이며 Region based method의 일종이다.
+학습 방식은 Mask-R-CNN을 살펴보면서 보도록 하겠다.
+
+***
 어떻게 흘러왔는 지에 대한 내용 정리
 
 1. R-CNN
@@ -15,7 +45,7 @@ comments: true
   classify하는 순서로 구성된다. (*training 하는 방법은 조금 아래에*)
   ![R-CNN](https://whikwon.github.io/images/R-CNN.PNG) <br>
 
-  위 내용을 좀 더 세부적으로 설명하자면 ***selective search*** 를 이용해서 Input image를 수 많은 ***region proposals(bounding boxes)*** 로 세분화한다.
+  위 내용을 좀 더 세부적으로 설명하자면 **selective search** 를 이용해서 Input image를 수 많은 **region proposals(bounding boxes)** 로 세분화한다.
   이들 proposals은 제각각 다른 size를 갖고 있기 때문에 warp해서 같은 크기의 image로 만들어준다.
 
   이렇게 만든 image를 CNN 구조에 넣어주어 feature를 계산하는 작업을 거치게 된다. 해당 논문에서는 AlexNet을
@@ -54,8 +84,10 @@ comments: true
 
   내용은 매우 간단하다. Region proposals들이 형태가 있다고 가정하고 이미지를 CNN을 통과시킨 후에
   나오는 feature들에 각각의 proposal들을 매칭시켜서 feature를 구한다. 그리고 이들을 RoIpooling(*max-pooling으로 구성 됨*)
-  을 해서 모두 같은 크기로 만들어주고 이를 FC layer 넣어 classification을 수행한다.
+  을 해서 모두 같은 크기로 만들어주고 이를 FC layer 넣어 classification을 수행한다. <br>
+  전체 구조를 정리한 내용은 아래와 같다. training 시에는
 
+  ![Fast R-CNN](https://whikwon.github.io/images/Fast-R-CNN.PNG)
 
 3. Faster R-CNN
 
@@ -66,4 +98,4 @@ Reference:  <br>
 1. selective searach image : https://www.koen.me/research/pub/uijlings-ijcv2013-draft.pdf
 2. Girshick, Ross, et al. ["Rich feature hierarchies for accurate object detection and semantic segmentation."](https://arxiv.org/abs/1311.2524)
 Proceedings of the IEEE conference on computer vision and pattern recognition. 2014.
-3. CS231N Lecture
+3. [Stanford CS231n Lecture11 slides](http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf)

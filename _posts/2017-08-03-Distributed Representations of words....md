@@ -6,6 +6,7 @@ comments: true
 
 - CS224n Lecture2 내용에 포함된 논문으로 Skip-gram에 대한 내용을 주로 다루고 있다.
 
+***
 #### 1. Introduction <br>
 Distributed representations of words는 아주 예전부터 연구되던 주제이다. 과거에 연구가 진행되어 오다가
 NLP에서 Skip-gram 모델이 발표가 되면서 낮은 연산량으로 training이 가능해졌다.
@@ -14,16 +15,18 @@ NLP에서 Skip-gram 모델이 발표가 되면서 낮은 연산량으로 trainin
 *Hierarchical softmax, Negative sampling, Subsampling of frequent word, Phase skip-gram* 이 그것들이다.
 순서대로 상세하게 소개하도록 하겠다.
 
+***
 #### 2. The Skip-gram Model <br>
 Skip-gram model을 training하는 방법은 특정 word를 중심으로 주변에 가장 있을만한 word를 찾는 것이다.
 maximize할 objective function은 아래와 같다. <br>
-> $${1 \above 1pt T} \sum_{t=1}^T \sum_{-c\leqq j \leqq c, j\neq 0} log\ p(w_{t+j}|w_t)$$ <br>
-> $$(c : window\ size,\ w_t : center\ word)$$ <br>
+$${1 \above 1pt T} \sum_{t=1}^T \sum_{-c\leqq j \leqq c, j\neq 0} log\ p(w_{t+j}|w_t)$$ <br>
+$$(c : window\ size,\ w_t : center\ word)$$ <br>
 
 그리고 구하고자 하는 center word일 때 output word일 확률은 아래와 같이 정의한다.
-> $$p(w_O|w_I) = {exp({v'_{w_O}}^T v_{w_I}) \above 1pt \sum_{w=1}^W exp({v'_w}^T v_{w_I})}$$ <br>
-> $$(v_w,v'_w :\ "input"\ and\ "output"\ vector\ representations\ of\ w,\ W: number\ of\ words\ in\ vocabulary)$$
+$$p(w_O|w_I) = {exp({v'_{w_O}}^T v_{w_I}) \above 1pt \sum_{w=1}^W exp({v'_w}^T v_{w_I})}$$ <br>
+$$(v_w,v'_w :\ "input"\ and\ "output"\ vector\ representations\ of\ w,\ W: number\ of\ words\ in\ vocabulary)$$
 
+***
 #### 2.1 Hiearchical Softmax <br>
 $$\nabla log\ p(w_O|w_I)$$를 구할 때의 연산량이 $$W$$에 비례하는데 $$W$$는 보통 $$10^5-10^7$$ 정도로 큰 편이라
 줄이고자 하여 도입한 개념이다. 줄인 뒤의 연산량은 $$log_2(W)$$에 비례하게 된다.
@@ -34,8 +37,8 @@ $$\nabla log\ p(w_O|w_I)$$를 구할 때의 연산량이 $$W$$에 비례하는�
 Noise Contrastive Estimation(NCE)에서 출발한 개념으로 NCE는 좋은 모델은 *Should be able to differentiate
 data from noise by means of logistic regression* 해야 한다고 가정하고 있다.
 그렇게 나온 Negative Sampling의 objective function은 아래와 같다. <br>
-> $$log\ \sigma({v'_{w_O}}^T v_{w_I}) + \sum_{i=1}^k \mathbb{E}_{w_i} \sim P_n(w)[log\ \sigma(-{v'_{w_i}}^Tv_{w_I})]$$ <br>
-> $$(k : \#\ of\ negative\ samples)$$ <br>
+$$log\ \sigma({v'_{w_O}}^T v_{w_I}) + \sum_{i=1}^k \mathbb{E}_{w_i} \sim P_n(w)[log\ \sigma(-{v'_{w_i}}^Tv_{w_I})]$$ <br>
+$$(k : \#\ of\ negative\ samples)$$ <br>
 
 기존 Skip-gram 모델의 Objective function을 대체하는 이 식을 보자.
 먼저 input data(center word)에 대해서 target word를 포함 추가 k개의 오답(negative sample)을 $$P_n(w)$$의 확률로 sampling한다.
@@ -46,15 +49,17 @@ negative word들의 확률 값에 샘플링 확률을 곱한 값을 최소로 �
 negative word의 샘플링 확률은 $$P(w_i) = {f(w_i)^{3/4} \above 1pt {\sum_{j=0}^n f(w_j)^{3/4}}}$$ 로,
 전체 단어 중에 얼마나 있는지 고려해서 뽑히게 된다. 위 식에서 $$3/4$$승은 empirical한 값으로 성능이 가장 좋다고 한다.
 
+***
 #### 2.3 Subsampling of Frequent Words <br>
 큰 corpora(말뭉치)에는 거의 정보를 가지고 있지 않은 단어들이 많이 반복적으로 포함된다. (예: "in", "the", "a")
 그래서 이런 쓸모없는 많은 정보들을 거르기 위해 Subsampling을 진행한다.
 Subsampling 후 preserve probability를 아래와 같이 정의한다. <br>
-> $$P(w_i) = 1 - \sqrt {t \above 1pt f({w_i})}$$<br>
-> $$(f(w_i):the\ frequency\ of\ word\ of\ w_i,\ t: chosen\ threshold \sim 10^{-5})$$ <br>
+$$P(w_i) = 1 - \sqrt {t \above 1pt f({w_i})}$$<br>
+$$(f(w_i):the\ frequency\ of\ word\ of\ w_i,\ t: chosen\ threshold \sim 10^{-5})$$ <br>
 
 단순하게 빈도가 높은 단어는 조금 남기고 낮은 단어는 많이 남긴다고 이해하면 되겠다.
 
+***
 #### 4. Learning Phrases <br>
 corpora내에 많은 phrases들이 각각의 word들의 합쳐진 뜻이라기 보다는 완전히 새로운 뜻을 갖는 경우가
 많았다. (예 : "New York Times", "Toronto Maple Leaf") 그래서 이런 phrases에 차라리 unique한 token을 줘서
