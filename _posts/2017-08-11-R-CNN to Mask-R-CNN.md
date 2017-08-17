@@ -120,7 +120,7 @@ Fast R-CNN에서 SS이후에 가장 큰 bottleneck을 RoIpooling으로 해결했
 - **Region Proposal Networks(RPN)** <br>
 
   아래 그림을 보면서 RPN의 개념에 대해 설명하도록 하겠다. <br>
-  ![RPN](https://whikwon.github.io/images/region_proposal_network.PNG) <br>
+  ![RPN](http://judelee19.github.io/img/machine_learning/Fast-RCNN_pic_2.png) <br>
 
   RPN의 핵심적인 아이디어는 network 내에 Region proposal할 수 있게 해서 전체를 Fully convolutional network로
   만들자는 데에서 출발한다. region proposal을 위해서 conv layer들을 지난 feature map을 $$n x n$$의 sliding window를
@@ -182,3 +182,4 @@ Proceedings of the IEEE conference on computer vision and pattern recognition. 2
 3. [Stanford CS231n Lecture11 slides](http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf)
 4. Shaoqing Ren, Kaiming He, Ross Girshick, Jian Sun. ["Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks"](https://arxiv.org/pdf/1506.01497.pdf). 2016.
 5. Kaiming He, Georgia Gkioxari, Piotr Dollár, Ross Girshick. ["Mask R-CNN"](https://arxiv.org/pdf/1703.06870.pdf). 2017.
+6. [How RPN Works](https://www.youtube.com/watch?v=X3IlbjQs190) - YouTube
