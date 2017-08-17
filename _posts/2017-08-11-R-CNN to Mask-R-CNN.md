@@ -36,7 +36,7 @@ Mask-R-CNN이 최근에 나온 대표적인 모델이며 Region based method의 
 학습 방식은 Mask-R-CNN을 살펴보면서 보도록 하겠다.
 
 ***
-어떻게 흘러왔는 지에 대한 내용 정리
+Object detection 분야가 어떻게 흘러왔는 지에 대표적인 모델을 중심으로 내용을 소개하도록 하겠다.
 
 ### 1. R-CNN <br>
 
@@ -73,7 +73,8 @@ classification을 학습시켜주고 bbox도 학습시켜줘야하고 CNN도 pre
 자세하게 설명되어 있는 블로그가 찾기 어렵다. [논문](https://arxiv.org/abs/1311.2524)을 보자.
 
 - selective search <br>
-[selective search](http://www.cs.cornell.edu/courses/cs7670/2014sp/slides/VisionSeminar14.pdf)
+Region proposal에 사용하는 selective search에 대한 설명은 다음 링크를 참조하도록 하자. [링크](http://www.cs.cornell.edu/courses/cs7670/2014sp/slides/VisionSeminar14.pdf) <br>
+아래는 예시 그림이다.
 ![SS](https://cdn-images-1.medium.com/max/1600/1*ZQ03Ib84bYioFKoho5HnKg.png)
 
 ### 2. Fast R-CNN
