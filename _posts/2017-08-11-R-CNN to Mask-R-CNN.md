@@ -92,7 +92,8 @@ Fast R-CNN에서 위 문제에 대한 큰 부분을 해결하였으며 핵심 �
   나오는 feature들에 각각의 proposal들을 매칭시켜서 feature를 구한다. 그리고 이들을 RoIpooling(*max-pooling으로 구성 됨*)
   을 해서 모두 같은 크기의 RoI feature vector로 만들어주고 이를 FC layer를 통과시켜 classification
   과 bbox regression을 수행한다. <br>
-  RoIpooling을 통해서 기존에 SS 이후에 47초 정도 걸리던 runtime을 0.32초로 단축시켰다. (*이제 2초 남았다 -> Faster-R-CNN*)
+  RoIpooling을 통해서 기존에 SS 이후에 47초 정도 걸리던 runtime을 0.32초로 단축시켰다. <br>
+  (*이제 2초 남았다 -> Faster-R-CNN*)
 
 전체 구조를 보면서 추가적으로 R-CNN에서 개선한 내용을 살펴보도록 하자.
 ![Fast R-CNN](https://whikwon.github.io/images/Fast-R-CNN.PNG)
@@ -112,8 +113,8 @@ Faster R-CNN에서 이를 다른 방법으로 접근해서 해결하는데 뒤�
 ### 3. Faster R-CNN
 
 앞선 모델들의 많은 개선을 통해 detection 속도가 빨라지긴 했으나 실시간으로 사용하기에 2.3초는 충분히 빠르진 않다. <br>
-Fast R-CNN에서 SS이후에 가장 큰 bottleneck을 RoIpooling으로 해결했다고 하면 이제 실시간 detection을 위해
-SS에 걸리는 2초에 대해 개선을 할 차례이다. 이에 대한 내용이 Faster R-CNN이며 핵심 내용은 **RPN(Region Proposal Networks)** 이다.
+Fast R-CNN에서 SS이후에 가장 큰 bottleneck을 RoIpooling으로 해결했다고 하면 이제 실시간 detection을 위해 SS에
+걸리는 2초에 대해 개선을 할 차례이다. 이에 대한 내용이 Faster R-CNN이며 핵심 내용은 **RPN(Region Proposal Networks)** 이다.
 
 - **Region Proposal Networks(RPN)** <br>
 
@@ -128,36 +129,44 @@ SS에 걸리는 2초에 대해 개선을 할 차례이다. 이에 대한 내용�
   역할은 sliding window를 통과한 각각의 정보들이 참조할 수 있는 box를 만들어주는 것이다. <br>
   sliding window의 중심점을 기준으로 다양한 크기의 box를 만들고 이에 대한 정보와 ground truth 정보, 그리고 predict한
   정보까지 비교해서 학습 시에 가장 실제 값에 유사한 anchor로 예측할 수 있게끔 도와주는 역할이라고 보면 된다. <br>
-  해당 논문에선 k = 9(*3 scales, aspects ratio each*)를 사용했고 anchor는 모델이 Translation-Invariant한 특성을
-  준다고 한다. <br>
+  해당 논문에선 k = 9(*3 scales, aspects ratio each*)를 사용했고 anchor를 통해 다양한 scale을 고려하게 되므로 <br>
+  모델이 Translation-Invariant한 특성을 갖게 된다고 한다. 학습 상세한 조건은 아래에서 자세히 보자.<br>
 
 - **Loss function of RPN** <br>
 
-  Training시 기준이 전 모델들에 비해 까다롭다. 1) IoU가 가장 높은 anchor에 positive label, <br>
+  Training시 기준이 전 모델들에 비해 까다롭다. ***1) IoU가 가장 높은 anchor에 positive label, <br>
   2) IoU가 0.7보다 높은 anchor에 positive label, 3) IoU가 0.3보다 낮은 anchor에 negative label <br>
-  을 준 후에 positive label로만 학습을 진행한다. <br>
+  을 준 후에 positive label로만 학습을 진행한다.*** <br>
   Objective function은 아래와 같다. <br>
   $$L(\{p_i\},\{t_i\}) = {1 \above 0.5pt N_{cls}} \sum_i L_{cls}(p_i,p_i^*) + \lambda {1 \above 0.5pt N_{reg}} \sum_i p_i^* L_{reg} (t_i, t_i^*)$$ <br>
-  $$i$$는 anchor의 index이고, $$p_i$$는 i가 object일 확률, $$p_i^*$$는 anchor가 positive면 1 외에는 0을 나타낸다. <br>
-  $$t_i$$는 predicted bbox의 네 점을 의미하며, $$t_i^*$$는 ground-truth의 정보를 의미한다. <br>
+  $$i$$는 anchor의 index이고, $$p_i$$는 i가 object일 확률, $$p_i^*$$는 anchor가 positive면 1 외에는 0을 나타낸다.
+  $$t_i$$는 predicted bbox의 정보를 의미하며, $$t_i^*$$는 ground-truth의 정보를 의미한다. <br>
+  (*위치 정보는 x,y,h,w,로 이루어져 있으며 x,y는 box의 center, h,w는 각각 높이와 너비를 의미한다.*) <br>
   $$L_{cls}$$ 는 2개 class에 대한 log loss를 의미하며 $$L_{reg}$$는 $$t_i$$와 $$t_i^*$$의 smooth $$L_1$$ loss를 구한다. <br.
-  이는 anchor box와 가까운 ground-truth의 차를 나타낸다고 보면 되겠다. <br>
-  위 내용을 정리하자면 1) object인지 아닌지에 대한 학습을 하며 2) bbox는 anchor와 ground-truth 와의 비교를 통해 <br>
-  어느 정도 anchor를 기준으로 ground-truth에 가까워지게 학습한다. <br>
+  이는 anchor box와 가까운 ground-truth의 차를 나타낸다고 보면 되겠다.
+  위 내용을 정리하자면 1) object인지 아닌지에 대한 학습을 하며 2) bbox는 anchor와 ground-truth 와의 비교를 통해
+  어느 정도 anchor를 기준으로 ground-truth에 가까워지게 학습한다.
+
+- **training details**  <br>
+  논문에서 학습했을 때는 $$128^2, 256^2, 512^2$$의 scale과 $$1:1, 1:2, 2:1$$ aspect ratio를 사용하였다. <br>
+  그리고 VGGNet이 classification시에 마지막 conv layer의 spatial size가 7X7이라서 sliding window 하기 어렵지 않겠
+  냐는 걱정을 할 수 있는데, detection에 사용되는 이미지는 classification에 사용되는 224X224보다 훨씬 큰 ***600X1000***
+  이미지를 사용해서 마지막 layer를 거치고 40X60 크기의 spatial size를 얻을 수 있어 3X3 filter로 약 40*60*9개의
+  anchor를 얻을 수 있다. 이들 중 바깥 부분의 cross-boundary를 제외하고 NMS를 하면 이미지 당 약 2000개의 bbox를
+  얻을 수 있고 이들 anchor 중 각각 256개의 positive, negative label을 무작위로 샘플링해서 training시킨다.
 
 - **Sharing Convolution Features for Region Proposal and Object Detection** <br>
 
   이제 RPN을 학습시켰으니 Fast R-CNN과 합치는 작업을 해야겠다. <br>
   4가지 step을 통해서 한다고 설명하고 있다. <br>
-  먼저, RPN을 독립적으로 학습시킨다. 그 다음에 학습된 RPN을 이용해서 Fast R-CNN을 학습시킨다.
-  이 때까지는 서로 conv layer를 공유하고 있지 않아서 하나의 network에서 각각을 고정하고
+  먼저, RPN을 pre-trained model을 이용해서 독립적으로 학습시킨다. 그 다음에 학습된 RPN에서 생성한 Region proposals와
+  pre-trained model을 이용해서 Fast R-CNN을 학습시킨다. 이 때까지는 서로 conv layer를 공유하고 있지 않아서 하나의 network에서 각각을 고정하고
   RPN, Fast R-CNN을 fine-tuning해주어 conv layer를 공유해서 하나의 network로 만들어준다.
   (*논문에선 둘을 합친 다음에 한 번에 training시키는게 어렵다고 얘기하고 있다.*)
 
-다른 내용으로는 anchor 크기가 정해져 있기 때문에 더 큰 object을 detect하는데 좀 어렵지 않을까라는 생각이 들지만
+추가 참고할 내용으로는 anchor 크기가 정해져 있기 때문에 더 큰 object을 detect하는데 좀 어렵지 않을까라는 생각이 들지만
 object의 가운데에 초점이 맞춰지면 이를 중심으로 bbox의 크기를 조절해서 어느 정도까진 예측이 가능하다고 한다.  <br>
 
-training 시에 **cross-boundary anchor** 를 무시한다고 한다. 이를 고려했을 때 학습이 어렵다고 한다. <br>
 상세한 다른 모델과의 평가 결과는 논문을 참조하도록 하자. <br>
 아무튼 Faster R-CNN의 의의는 RPN을 도입해서 실시간 object detection을 가능한 정도의 속도로 향상시켰다는 점이다.
 
