@@ -189,5 +189,5 @@ git 내에서 이루어지는 활동을 도식화해놓은 그림은 아래와 �
 
 Reference: <br>
 [생활코딩 - 지옥에서 온 Git](https://opentutorials.org/course/2708) <br>
-[아틀라시안 - Git 협업 flow 설명](https://www.atlassian.com/git/tutorials/comparing-workflows)
-Git 데이터 흐름 이미지 : https://onezeronull.com/2015/04/10/git-diagram-for-data-transport-commands/
+[아틀라시안 - Git 협업 flow 설명](https://www.atlassian.com/git/tutorials/comparing-workflows) <br>
+Git 데이터 흐름 이미지 : https://onezeronull.com/2015/04/10/git-diagram-for-data-transport-commands/ <br>
