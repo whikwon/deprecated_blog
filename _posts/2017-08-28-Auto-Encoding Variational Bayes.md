@@ -30,8 +30,9 @@ latent variable은 우리의 상상력, 어떤 추상적인 feature라고 생각
 5. $$P(X | z)$$ : latent variable이 주어졌을 때 생성 data의 분포 <br>
 (*상상력이 실제 animal로 되는 것*)
 
-우리는 $$P(X)$$를 알고 싶다. law of probability에 따라 $$P(X) = \int P(X | z)P(z)dz$$로 나타낼 수 있다.
-$$P(X,z) = P(X | z)P(z)$$ 이므로 $$P(X,z)$$를 알거나 $$P(X | z), P(z)$$을 알면 생성 모델을 만들 수 있겠다.
+
+우리는 $$P(X)$$를 알고 싶다. law of probability에 따라 $$P(X) = \int P(X \vert z)P(z)dz$$로 나타낼 수 있다.
+$$P(X,z) = P(X \vert z)P(z)$$ 이므로 $$P(X,z)$$를 알거나 $$P(X \vert z), P(z)$$을 알면 생성 모델을 만들 수 있겠다.
 
 VAE의 핵심 아이디어는 위 식의 $$P(z)$$ 대신 $$P(z|X)$$를 사용하는 것인데 이건 직관적으로 생각해봤을 때는
 가지고 있는 data로 부터 얻은 latent variable이 우리가 생성하려고 하는 data의 latent variable에서
@@ -74,6 +75,9 @@ $$\begin{align}
 
 최종적으로 얻은 결과는 아래와 같다.
 $$\log P(X) - D_{KL}[Q(z \vert X) \Vert P(z \vert X)] = E[\log P(X \vert z)] - D_{KL}[Q(z \vert X) \Vert P(z)]$$
+
+위 식을 봤을 때 구조는 $$Q(z \vert X)$$가 encode net, $$z$$가 encoded representation, $$P(X \vert z)$$가
+decoder net을 하는 **autoencoder** 의 구조와 유사함을 알 수 있다. 그래서 붙여진 이름이 **VAE** 이다.
 
 
 
