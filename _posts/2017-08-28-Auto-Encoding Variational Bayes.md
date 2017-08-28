@@ -21,14 +21,14 @@ latent variable은 우리의 상상력, 어떤 추상적인 feature라고 생각
 번역을 통해 이해를 돕기로 하겠다.
 
 <ol>
-1. $$X$$ : 모델링하려는 data (*animal*)
-2. $$z$$ : latent variable (*우리의 상상력*)
-3. $$P(X)$$ : data의 확률 분포 (*animal kingdom*)
-4. $$P(z)$$ : latent variable의 확률 분포 (*상상력의 원천, 뇌*)
-5. $$P(X|z)$$ : latent variable이 주어졌을 때 생성 data의 분포 (*상상력이 실제 animal로 되는 것*)
+1. $X$ : 모델링하려는 data (*animal*)
+2. $z$ : latent variable (*우리의 상상력*)
+3. $P(X)$ : data의 확률 분포 (*animal kingdom*)
+4. $P(z)$ : latent variable의 확률 분포 (*상상력의 원천, 뇌*)
+5. $P(X|z)$ : latent variable이 주어졌을 때 생성 data의 분포 (*상상력이 실제 animal로 되는 것*)
 </ol>
 
-우리는 $$P(X)$$를 알고 싶다. law of probability에 따라 $$P(X) = \int P(X|z) P(z) dz$$로 나타낼 수 있다.
+우리는 $$P(X)$$를 알고 싶다. law of probability에 따라 $$P(X) = \int P(X|z)P(z)dz$$로 나타낼 수 있다.
 $$P(X,z) = P(X|z)P(z)$$ 이므로 $$P(X,z)$$를 알거나 $$P(X|z), P(z)$$을 알면 생성 모델을 만들 수 있겠다.
 
 VAE의 핵심 아이디어는 위 식의 $$P(z)$$ 대신 $$P(z|X)$$를 사용하는 것인데 이건 직관적으로 생각해봤을 때는
@@ -48,20 +48,20 @@ D_{KL}[Q(z | X) \Vert P(z | X)] &= \sum_z Q(z | X) \, \log \frac{Q(z | X)}{P(z |
                             &= E[\log Q(z \vert X) - \log P(z \vert X)
 \end{align}$$
 위 식에서 Bayes rule을 사용해서 식을 일부 수정하면 <br>
-\begin{align}
+$$\begin{align}
 D_{KL}[Q(z \vert X) \Vert P(z \vert X)] &= E \left[ \log Q(z | X) - \log \frac{P(X | z) P(z)}{P(X)} \right] \\
                                         &= E[\log Q(z | X) - (\log P(X | z) + \log P(z) - \log P(X))] \\
                                         &= E[\log Q(z | X) - \log P(X | z) - \log P(z) + \log P(X)]
-\end{align}
+\end{align}$$
 위와 같이 나타낼 수 있고 expectation항에 z에 depend하지 않는 항들을 밖으로 꺼내면 아래와 같이 된다. <br>
-$$D_{KL}[Q(z \vert X) \Vert P(z \vert X)] &= E[\log Q(z \vert X) - \log P(X \vert z) - \log P(z)] + \log P(X)$$ <br>
-$$D_{KL}[Q(z \vert X) \Vert P(z \vert X)] - \log P(X) &= E[\log Q(z \vert X) - \log P(X \vert z) - \log P(z)]$$ <br>
+$$D_{KL}[Q(z | X) \Vert P(z | X)] &= E[\log Q(z | X) - \log P(X | z) - \log P(z)] + \log P(X)$$ <br>
+$$D_{KL}[Q(z | X) \Vert P(z | X)] - \log P(X) &= E[\log Q(z | X) - \log P(X | z) - \log P(z)]$$ <br>
 항들을 조금 더 정리해보자.<br>
-\begin{align}
+$$\begin{align}
 \log P(X) - D_{KL}[Q(z \vert X) \Vert P(z \vert X)] &= E[\log P(X \vert z) - (\log Q(z \vert X) - \log P(z))] \\
                                        &= E[\log P(X \vert z)] - E[\log Q(z \vert X) - \log P(z)] \\[10pt]
                                        &= E[\log P(X \vert z)] - D_{KL}[Q(z \vert X) \Vert P(z)]
-\end{align}
+\end{align}$$
 
 최종적으로 얻은 결과는 아래와 같다.
 $$\log P(X) - D_{KL}[Q(z \vert X) \Vert P(z \vert X)] = E[\log P(X \vert z)] - D_{KL}[Q(z \vert X) \Vert P(z)]$$
