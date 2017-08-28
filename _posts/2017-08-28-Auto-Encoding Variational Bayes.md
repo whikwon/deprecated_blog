@@ -30,8 +30,8 @@ latent variable은 우리의 상상력, 어떤 추상적인 feature라고 생각
 5. $$P(X | z)$$ : latent variable이 주어졌을 때 생성 data의 분포 <br>
 (*상상력이 실제 animal로 되는 것*)
 
-우리는 $$P(X)$$를 알고 싶다. law of probability에 따라 $$P(X) = \int P(X|z)P(z)dz$$로 나타낼 수 있다.
-$$P(X,z) = P(X|z)P(z)$$ 이므로 $$P(X,z)$$를 알거나 $$P(X|z), P(z)$$을 알면 생성 모델을 만들 수 있겠다.
+우리는 $$P(X)$$를 알고 싶다. law of probability에 따라 $$P(X) = \int P(X | z)P(z)dz$$로 나타낼 수 있다.
+$$P(X,z) = P(X | z)P(z)$$ 이므로 $$P(X,z)$$를 알거나 $$P(X | z), P(z)$$을 알면 생성 모델을 만들 수 있겠다.
 
 VAE의 핵심 아이디어는 위 식의 $$P(z)$$ 대신 $$P(z|X)$$를 사용하는 것인데 이건 직관적으로 생각해봤을 때는
 가지고 있는 data로 부터 얻은 latent variable이 우리가 생성하려고 하는 data의 latent variable에서
@@ -60,9 +60,10 @@ D_{KL}[Q(z \vert X) \Vert P(z \vert X)] &= E \left[ \log Q(z | X) - \log \frac{P
 위와 같이 나타낼 수 있고 expectation항에 z에 depend하지 않는 항들을 밖으로 꺼내면 아래와 같이 된다. <br>
 
 $$\begin{align}
-D_{KL}[Q(z | X) \Vert P(z | X)] &= E[\log Q(z | X) - \log P(X | z) - \log P(z)] + \log P(X)$$ <br>
-$$D_{KL}[Q(z | X) \Vert P(z | X)] - \log P(X) &= E[\log Q(z | X) - \log P(X | z) - \log P(z)]$$ <br>
+D_{KL}[Q(z \vert X) \Vert P(z \vert X)] &= E[\log Q(z \vert X) - \log P(X \vert z) - \log P(z)] + \log P(X) \\
+D_{KL}[Q(z \vert X) \Vert P(z \vert X)] - \log P(X) &= E[\log Q(z \vert X) - \log P(X \vert z) - \log P(z)]
 \end{align}$$ <br>
+
 항들을 조금 더 정리해보자.<br>
 
 $$\begin{align}
@@ -73,6 +74,7 @@ $$\begin{align}
 
 최종적으로 얻은 결과는 아래와 같다.
 $$\log P(X) - D_{KL}[Q(z \vert X) \Vert P(z \vert X)] = E[\log P(X \vert z)] - D_{KL}[Q(z \vert X) \Vert P(z)]$$
+
 
 
 Generative vs Discriminator : https://stackoverflow.com/questions/879432/what-is-the-difference-between-a-generative-and-discriminative-algorithm
