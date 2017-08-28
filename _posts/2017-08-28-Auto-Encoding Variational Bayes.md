@@ -20,13 +20,14 @@ latent variable은 우리의 상상력, 어떤 추상적인 feature라고 생각
 이 블로그[https://wiseodd.github.io/techblog/2016/12/10/variational-autoencoder/]에서 예시를 통해 잘 설명하고 있는데
 번역을 통해 이해를 돕기로 하겠다.
 
-<ol>
-1. $X$ : 모델링하려는 data (*animal*)
-2. $z$ : latent variable (*우리의 상상력*)
-3. $P(X)$ : data의 확률 분포 (*animal kingdom*)
-4. $P(z)$ : latent variable의 확률 분포 (*상상력의 원천, 뇌*)
-5. $P(X|z)$ : latent variable이 주어졌을 때 생성 data의 분포 (*상상력이 실제 animal로 되는 것*)
-</ol>
+먼저, Notation은 아래와 같다.
+
+>
+1. $$X$$ : 모델링하려는 data (*animal*)
+2. $$z$$ : latent variable (*우리의 상상력*)
+3. $$P(X)$$ : data의 확률 분포 (*animal kingdom*)
+4. $$P(z)$$ : latent variable의 확률 분포 (*상상력의 원천, 뇌*)
+5. $$P(X|z)$$ : latent variable이 주어졌을 때 생성 data의 분포 (*상상력이 실제 animal로 되는 것*)
 
 우리는 $$P(X)$$를 알고 싶다. law of probability에 따라 $$P(X) = \int P(X|z)P(z)dz$$로 나타낼 수 있다.
 $$P(X,z) = P(X|z)P(z)$$ 이므로 $$P(X,z)$$를 알거나 $$P(X|z), P(z)$$을 알면 생성 모델을 만들 수 있겠다.
