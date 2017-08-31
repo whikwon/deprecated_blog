@@ -16,13 +16,13 @@ comments: true
 
 ### mean-field approximation
 
-variational inference에서 위에서 얘기한 것처럼 latent variable $$Z$$의 data $$X$$가 주어졌을 때의 posterior distribution을
+variational inference에서 위에서 얘기한 것처럼 latent variable $$z$$의 data $$X$$가 주어졌을 때의 posterior distribution을
 구하는게 목적으로 사용되는데 intractable하니 근사하기 위해서 variational distribution을 이용한다.
-$$P(Z \vert X) \sim Q(Z)$$
-여기서 $$Q(Z)$$는 단순한 분포를 사용해서 $$P(Z \vert X)$$와 최대한 가깝게 하는 것이 목적이므로 KL divergene를 최소화하는 방향으로
+$$P(Z \vert X) \sim Q(z)$$
+여기서 $$Q(z)$$는 단순한 분포를 사용해서 $$P(z \vert X)$$와 최대한 가깝게 하는 것이 목적이므로 KL divergence를 최소화하는 방향으로
 가면 될 듯하다. KL divergence는 아래 식으로 나타난다.
-$$D_{KL}(Q||P) = \Sigma_Z Q(Z) log {Q(Z) \above P(Z \vert X)}$$ Bayes 정리를 사용해서 식을 조금 더 풀면
-$$logP(X) = D_{KL}(Q||P) - \Sigma_Z Q(Z) log {Q(Z) \above P(Z,X)} = D_{KL}(Q||P) + L(Q)$$ 라는 식을 얻을 수 있고
+$$D_{KL}(Q \Vert P) = \Sigma_z Q(Z) log {Q(z) \above 0.5pt P(z \vert X)}$$ Bayes 정리를 사용해서 식을 조금 더 풀면
+$$logP(X) = D_{KL}(Q||P) - \Sigma_z Q(z) log {Q(z) \above 0.5pt P(z,X)} = D_{KL}(Q||P) + L(Q)$$ 라는 식을 얻을 수 있고
 $$logP(X)$$는 $$Q$$에 대해 고정이니 $$L(Q)$$를 최대화하는게 $$Q$$로부터 $$P$$의 KL divergence를 줄일 수 있는 길이다.
 이 내용을 VAE에 사용해서 Object function을 구하게 된다.
 
@@ -104,7 +104,7 @@ decoder net을 하는 **autoencoder** 의 구조와 유사함을 알 수 있다.
 **Object function** 의 항들을 설명하면 첫번째 항은 reconstruction loss이다. encoder를 통과한 z가 X를 생성했을 때 얼마나 유사한지
 에 대한 expected negative log likelihood라고 보면 되겠다. 이 항은 decoder가 reconstruction을 잘하게 해준다.
 
-두번째 항은 $$q_{\theta}(z \vert x)$$ 와 $$p(z)의  KL divergence로 $$q$$로 $$p$$를 나타냈을 때 얼마나 많은 정보 손실이
+두번째 항은 $$q_{\theta}(z \vert x)$$ 와 $$p(z)$$의  KL divergence로 $$q$$로 $$p$$를 나타냈을 때 얼마나 많은 정보 손실이
 있는지, 얼마나 둘이 가까운지 나타내주는 값이다. <br>
 주로 VAE에서 $$p(z) = N(0,1)$$로 두고 진행하기 때문에 $$z$$가 normal distribution과 다르면 패널티를 부여한다.
 $$z$$가 한쪽으로 치우치지 않고 다양하게 분포할 수 있도록 일종의 **regularizer** 역할을 한다고 볼 수 있겠다.
