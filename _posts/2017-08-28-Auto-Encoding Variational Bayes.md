@@ -21,8 +21,8 @@ variational inference에서 위에서 얘기한 것처럼 latent variable $$Z$$�
 $$P(Z \vert X) \sim Q(Z)$$
 여기서 $$Q(Z)$$는 단순한 분포를 사용해서 $$P(Z \vert X)$$와 최대한 가깝게 하는 것이 목적이므로 KL divergene를 최소화하는 방향으로
 가면 될 듯하다. KL divergence는 아래 식으로 나타난다.
-D_{KL}(Q||P) = \Sigma_Z Q(Z) log {Q(Z) \above P(Z \vert X)} Bayse 정리를 사용해서 식을 조금 더 풀면
-$$logP(X) = D_{KL}(Q||P) - \Sigma_Z Q(Z) log {Q(Z) \above P(Z,X)} = D_{KL}(Q||P) + L(Q) 라는 식을 얻을 수 있고
+$$D_{KL}(Q||P) = \Sigma_Z Q(Z) log {Q(Z) \above P(Z \vert X)}$$ Bayes 정리를 사용해서 식을 조금 더 풀면
+$$logP(X) = D_{KL}(Q||P) - \Sigma_Z Q(Z) log {Q(Z) \above P(Z,X)} = D_{KL}(Q||P) + L(Q)$$ 라는 식을 얻을 수 있고
 $$logP(X)$$는 $$Q$$에 대해 고정이니 $$L(Q)$$를 최대화하는게 $$Q$$로부터 $$P$$의 KL divergence를 줄일 수 있는 길이다.
 이 내용을 VAE에 사용해서 Object function을 구하게 된다.
 
@@ -112,28 +112,28 @@ $$z$$가 한쪽으로 치우치지 않고 다양하게 분포할 수 있도록 �
 그럼 encoder와 decoder의 각각 parameter들에 대해 loss function을 optimize해서 각각 값들을 update하게 될 것이다.
 
 이제 그럼 어떻게 objective function을 optimize할 것이냐는 문제만 남았다. <br>
-첫번째 항인 D_{KL}[Q(z \vert X) \Vert P(z)]은 $$Q(z \vert X)$$를 Gaussian으로, 여기서 샘플링한 z를 받은 $$P(z)$$도 Gaussian으로 설정한다.
+첫번째 항인 $$D_{KL}[Q(z \vert X) \Vert P(z)]$$은 $$Q(z \vert X)$$를 Gaussian으로, 여기서 샘플링한 z를 받은 $$P(z)$$도 Gaussian으로 설정한다.
 그럼 수식을 풀어서 계산할 수 있다.(논문 Appendix 참조.) <br>
 
-나머지 항인 E_{z \sim Q}[log P(X \vert z)]가 문제가 되는데 $$z$$의 샘플링이 많아질 수록 연산량이 커져서 문제가 된다.
+나머지 항인 $$E_{z \sim Q}[log P(X \vert z)]$$가 문제가 되는데 $$z$$의 샘플링이 많아질 수록 연산량이 커져서 문제가 된다.
 그래서 SGD처럼 1개의 $$z$$를 뽑아서 위 항을 $$P(X \vert z)$$라고 근사하고 전체 dataset $$D$$에서 $$X$$ 샘플을 뽑아서 SGD를 하는 것으로 생각할 수 있다. <br>
 최종적으로 아래 식이 구해지고 식을 들여다보면 $$P(X \vert z)$$가 $$Q$$에 더이상 dependen하지 않게 된 것을 볼 수 있다. <br>
 $$E_{X \sim D} [log P(X) - D[Q(z \vert X) \Vert P(z \vert X)]] = E_{X \sim D[log P(X \vert z) - D[Q(z \vert X) \Vert P(z)]]}$$
 이럴 경우에 Lower bound식에 $$Q$$에 관련된 항도 존재하기에 제대로 학습되기가 어렵다.
 
-이렇게, $$z$$가 샘플링되는 과정 때문에 발생하는 문제를 살펴보았고 이 문제를 reparamerization trick을 사용해서 문제를 해결한다.
+이렇게, $$z$$가 샘플링되는 과정 때문에 발생하는 문제를 살펴보았고 이 문제를 ***reparamerization trick*** 을 사용해서 문제를 해결한다.
 ![VAE-process](https://whikwon.github.io/images/VAE-proccess.png)
 기존 모델(왼쪽)을 보면 $$Q(z \vert X)$$로부터 얻은 $$\mu(X), \Sigma(X)$$로부터 $$z$$를 샘플링해서 바로 넣어주는 방법을 취했다면
 trick을 사용해서(오른쪽) noise variable $$\epsilon \sim N(0,I)$$로부터 샘플링을 해서 $$z = \mu(X) + \Sigma^{1/2}(X) * \epsilon$$의 식으로부터
 $$z$$를 구해서 넣어주는 방식을 택한다. 아래 그림에서 설명이 아주 잘 나타나 있다. 파란색 원(*random node*)에서는 Gradient descent가 막혀버려서
-이를 해결해준 것이라고 보면 되겠다.
+이를 해결해준 것이라고 보면 되겠다. <br>
 ![reparametization](http://1.bp.blogspot.com/-V-m6dOVaUL8/WQ2JKJ4Jj4I/AAAAAAAABrA/BjxqKMDfR6ggYCCqUNlBFiS4cqlyisgKACK4B/s1600/vae_3.PNG)
 
 그렇게 최종적으로 gradient descent를 할 식은 아래와 같다. <br>
 $$E_{X \sim D} [E_{\epsilon \sim N(0, I)}[log P(X \vert {z = \mu (X) + \Sigma^{1/2}(X) * \epsilon})] - D[Q(z \vert X) \Vert P(z)]]$$
 
-Test시에 샘플을 generate할 때는 encoder를 제외하고 $$z \sim N(0,I)$$에 놓고 진행하면 된다. $$Q(z \vert X)$$가 $$P(z)$$에 충분히 가까워졌으면
-좋은 샘플을 얻을 수 있겠다. Test 시 진행과정은 아래 그림과 같다. <br>
+Test시에 샘플을 generate할 때는 encoder를 제외하고 $$z \sim N(0,I)$$에 놓고 진행하면 된다. <br>
+$$Q(z \vert X)$$가 $$P(z)$$에 충분히 가까워졌으면 좋은 샘플을 얻을 수 있겠다. Test 시 진행과정은 아래 그림과 같다. <br>
 ![test_time](https://whikwon.github.io/images/test_time.png)
 
 Tutorial 내용
@@ -150,11 +150,10 @@ $$p(z)$$를 prior, $$p(x)$$를 observed로 놓고 posterior를 구하는게 목�
 VAE는 단순히 autoencoder와 연산 방식이 비슷해서 붙여진 이름.
 
 
-
-Generative vs Discriminator : https://stackoverflow.com/questions/879432/what-is-the-difference-between-a-generative-and-discriminative-algorithm
-
-
 Reference: <br>
-https://jaan.io/what-is-variational-autoencoder-vae-tutorial/
-https://wiseodd.github.io/techblog/2016/12/10/variational-autoencoder/
-https://en.wikipedia.org/wiki/Variational_Bayesian_methods
+Diederik P Kingma, Max welling. [Auto-Encoding Variational Bayes](https://arxiv.org/pdf/1312.6114). 2013. <br>
+Carl Doersch. [Tutorial on Variational Autoencoders](https://arxiv.org/pdf/1606.05908). 2016. <br>
+[wikipedia - Variational-bayesian_methods](https://en.wikipedia.org/wiki/Variational_Bayesian_methods) <br>
+[stackoverflow - generative vs discriminative](https://stackoverflow.com/questions/879432/what-is-the-difference-between-a-generative-and-discriminative-algorithm) <br>
+[blog1](https://jaan.io/what-is-variational-autoencoder-vae-tutorial/) <br>
+[blog2](https://wiseodd.github.io/techblog/2016/12/10/variational-autoencoder/) <br>
