@@ -1,6 +1,6 @@
 ---
 title: NMT by jointly learning to align and translate
-date: 2017-08-26 00:00:00
+date: 2017-09-05 00:00:00
 comments: true
 ---
 
