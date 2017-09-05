@@ -28,7 +28,7 @@ $$logP(X)$$는 $$Q$$에 대해 고정이니 $$L(Q)$$를 최대화하는게 $$Q$$
 
 ## Variational AutoEncoder란?
 
-VAE를 소개하기에 앞서 generative 모델은 무엇일까? generative모델은 data를 생성할 수 있는 모델이다. <br>
+VAE를 소개하기에 앞서 **generative 모델** 은 무엇일까? generative모델은 data를 생성할 수 있는 모델이다. <br>
 앞에서 본 GAN의 경우가 generative 모델에 속하며 VAE와는 조금은 다른 형태를 가지고 있다. <br>
 
 GAN에서는 Generator와 Discriminator을 학습시켜 내쉬 균형에 최대한 도달하도록 한 후
