@@ -123,7 +123,7 @@ Fast R-CNN에서 SS이후에 가장 큰 bottleneck을 RoIpooling으로 해결했
   ![RPN](http://mithril-ntu.github.io/L10/Screen%20Shot%202016-05-18%20at%204.22.52%20PM.png) <br>
 
   RPN의 핵심적인 아이디어는 network 내에 Region proposal할 수 있게 해서 전체를 Fully convolutional network로
-  만들자는 데에서 출발한다. region proposal을 위해서 conv layer들을 지난 feature map을 $$n x n$$의 sliding window를
+  만들자는 데에서 출발한다. region proposal을 위해서 conv layer들을 지난 feature map을 $$n$$ x $$n$$의 sliding window를
   통과시켜 기존보다 낮은 차원의 vector로 mapping시킨다. (ZF : 256-d, VGG : 512-d) <br>
   그리고 각각의 vector를 1X1 conv를 통해 *cls* layer와 *reg* layer로 전달하며 값을 얻는다. <br>
   여기서 *cls* 는 object/non-object를 구분하는 역할을 하게 되고 *reg* 는 bbox의 꼭지점을 찾는 역할을 하게 된다.
@@ -151,9 +151,9 @@ Fast R-CNN에서 SS이후에 가장 큰 bottleneck을 RoIpooling으로 해결했
 
 - **training details**  <br>
   논문에서 학습했을 때는 $$128^2, 256^2, 512^2$$의 scale과 $$1:1, 1:2, 2:1$$ aspect ratio를 사용하였다. <br>
-  그리고 VGGNet이 classification시에 마지막 conv layer의 spatial size가 7X7이라서 sliding window 하기 어렵지 않겠
-  냐는 걱정을 할 수 있는데, detection에 사용되는 이미지는 classification에 사용되는 224X224보다 훨씬 큰 ***600X1000***
-  이미지를 사용해서 마지막 layer를 거치고 40X60 크기의 spatial size를 얻을 수 있어 3X3 filter로 약 40*60*9개의
+  그리고 VGGNet이 classification시에 마지막 conv layer의 spatial size가 7x7이라서 sliding window 하기 어렵지 않겠
+  냐는 걱정을 할 수 있는데, detection에 사용되는 이미지는 classification에 사용되는 224x224보다 훨씬 큰 ***600x1000***
+  이미지를 사용해서 마지막 layer를 거치고 40x60 크기의 spatial size를 얻을 수 있어 3X3 filter로 약 40x60x9개의
   anchor를 얻을 수 있다. 이들 중 바깥 부분의 cross-boundary를 제외하고 NMS를 하면 이미지 당 약 2000개의 bbox를
   얻을 수 있고 이들 anchor 중 각각 256개의 positive, negative label을 무작위로 샘플링해서 training시킨다.
 
