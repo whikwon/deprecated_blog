@@ -9,7 +9,7 @@ comments: true
 먼저, image detection을 제외한 다른 vision 분야에서 연구되는 주제에 대해서 소개하도록 하겠다. <br>
 방법에 따라 아래와 같이 4가지로 구분되어 나누어진다. <br>
 ![Vision tasks](https://whikwon.github.io/images/vision_tasks.PNG) <br> <br>
-1. Semantic Segmentation  <br>
+1. Semantic Segmentation  <br>  
 image내 pixel들이 어떤 class를 나타내는지 찾는 방법이다.
 주로 학습에 사용되는 방법은 **Fully Convolutional로 transpose convolution** 을 사용한 up/down sampling으로
 각 pixel에 대한 classification을 수행한다. label data는 당연히 pixel별로 classify된 data를 사용한다.
