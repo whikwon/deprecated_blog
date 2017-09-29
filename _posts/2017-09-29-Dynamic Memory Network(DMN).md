@@ -46,10 +46,10 @@ answer module로 전달된다.
 
 층이 여러 개 있을 때 장점은 어떤 ***transitive inference*** 를 가능하게 해준다는 점이다.
 질문이 여러 번의 논리적인 사고를(문장들을) 거쳐서 답을 얻어야 하는 경우가 해당된다. <br>
-<예시> <br>
-Input : *John put down the football*, *John is in the living room* <br>
-Question : *Where is the football?* <br>
-Answer : *living room* <br>
+예시는 아래와 같다. <br>
+- Input : *John put down the football*, *John is in the living room* <br>
+- Question : *Where is the football?* <br>
+- Answer : *living room* <br>
 
 **Attention Mechanism** <br>
 Episodic Memory Network에서 사용되는 attention mechanism를 살펴보자. 이 후에 발전되는 모델들에서 바뀌는 부분이기도 하다.  
@@ -101,8 +101,11 @@ DMN 구조의 핵심을 Episodic Memory Module로 보아도 무방하며 얼마�
 모델이 pass의 개수에 따라서 어떤 식으로 작동을 하는지 확인할 것이다. 확인 대상은 input 문장의 각각 단어에 대한
 attention 정보이다.
 아래 그림에서 보듯이 1 pass와 2 pass 모델에 대해서 각각 비교했고 대체적으로 2 pass에서 더 특정 몇 개 단어에
-집중하는 것으로 보인다. 이는 pass를 적게 통과하면 전체 내용에 대해서 뭐가 중요한 지 파악이 안 되므로
-최대한 많은 정보를 전달하는 것이라고 생각해볼 수 있다. 
+집중하는 것으로 보인다. 이는 pass를 적게 통과하면 전체 내용에 대해서 뭐가 중요한 지 파악이 안 되서
+최대한 많은 정보를 전달하는 것이라고 생각해볼 수 있다. 대신 pass를 더 돌 경우에 처음에 본 강한 sentiment를
+나타내는 단어에 초점을 맞추기 보다는 그에 연관된 단어를 찾아서 확인하는 것을 볼 수 있다. 오른쪽 맨 밑 예시에서
+1 pass 때 **best** 에 집중되었다가 2 pass 때 **lukewarm** 에 집중되면서 negative로 예측하는 것이
+그 예시이다.
 
 ![qualitative analysis](https://whikwon.github.io/images/NLP_DMN_episodic_memory2.png)<br>
 <center> <i> &lt;Episodic Memory 정성적 평가 결과&gt;</i> </center> <br>
