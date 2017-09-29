@@ -110,6 +110,5 @@ attention 정보이다.
 ![qualitative analysis](https://whikwon.github.io/images/NLP_DMN_episodic_memory2.png)<br>
 <center> <i> &lt;Episodic Memory 정성적 평가 결과&gt;</i> </center> <br>
 
-
-
 Reference: <br>
+Ankit Kumar, Ozan Irsoy, Peter Ondruska, Mohit Iyyer, James Bradbury, Ishaan Gulrajani, Victor Zhong, Romain Paulus, Richard Socher. [Ask Me Anything: Dynamic Memory Networks for Natural Language Processing](https://arxiv.org/pdf/1506.07285). 2015
