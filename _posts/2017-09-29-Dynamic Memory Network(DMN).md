@@ -61,16 +61,16 @@ $$z(c, m, q) = \big [ c,m,q,c \circ q, c \circ m, \vert c-q \vert, \vert c-m \ve
 로 나타낼 수 있다. 그리고 $$G$$는 two-layer feed forward neural network를 사용해서 최종적으로
 $$G(c,m,q) = \sigma \bigg (W^{(2)} tanh \big ( W^{(1)} z(c,m,q) + b^{(1)} \big ) + b^{(2)} \bigg )$$ <br>
 위에서 구한 식을 최종적으로 episode 구하는 GRU 식에 활용하면 아래와 같은 식을 얻을 수 있다.
-\begin{align} h_t^i &= g_t^i GRU(c_t, h_{t-1}^i) + (1-g_t^i)h_{t-1}^i \\
-e^i &= h_{T_c}^i \end{align}
+$$\begin{align} h_t^i &= g_t^i GRU(c_t, h_{t-1}^i) + (1-g_t^i)h_{t-1}^i \\
+e^i &= h_{T_c}^i \end{align}$$
 
 **4) Answer Module** <br>
 Answer module은 우리가 하려는 task에 따라서(*task에 따라서 개별적으로 학습시켜줘야 한다. 일반적인 모델이긴 하지만 각각을 따로 할 수 있다는 거지 한 번
 학습시킨 모델이 모든 걸 할 수 있다는 뜻은 아니다.*) answer로 마지막 episodic memory값만 받거나 아니면 time step별로 받을 수도 있다.
 Answer module도 다른 module들과 마찬가지로 GRU를 사용하며 마지막 memory의 값 $$m^{T_M}$$을 initial state로 받아서 아래와 같이
 output $$y_t$$와 hidden state $$a_t$$를 생성한다. <br>
-\begin{align} y_t &= softmax(W^{(a)}a_t) \\
-a_t &= GRU([y_{t-1}, q], a_{t-1}) \end{align}
+$$\begin{align} y_t &= softmax(W^{(a)}a_t) \\
+a_t &= GRU([y_{t-1}, q], a_{t-1}) \end{align}$$
 
 ### Training
 supervised로 다른 모델들과 유사하게 cross-entropy error 감소하도록 학습이 진행된다.
