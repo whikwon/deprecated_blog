@@ -100,12 +100,6 @@ m^t &= GRU(c^t, m^{t-1}) \\
 \Rightarrow m^t &= ReLU(W^t[m^{t-1}; c^t; q] + b)
 \end{align}$$
 
-$$\begin{align}
-h_i &= g_i^t GRU(c_i, h_{i-1}) + (1-g_i^t)h_{i-1} \\
-&= u_i \circ \tilde{h_i} + (1 - u_i) \circ h_{i-1} \\
-\Rightarrow h_i &= g_i^t \circ \tilde {h_i} + (1 - g_i^t) \circ h_{i-1}
-\end{align}$$
-
 ## Experiments
 ### 1) Text QA Results
 DMN(이전 모델), DMN2(input layer -> input fusion layer), DMN3(soft attention -> attention based GRU), DMN+(untied model)
