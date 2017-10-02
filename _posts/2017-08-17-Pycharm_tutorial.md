@@ -1,4 +1,4 @@
----
+  ---
 title:  "Pycharm_tutorial"
 date: 2017-08-16 00:00:00
 comments: true
@@ -40,7 +40,7 @@ comments: true
   - Ctrl + Q : Documentation을 본다.
   - Ctrl + P : Parameter 정보를 본다.
   - Ctrl + B : 함수 위치 따라 들어간다. (navigate)
-  - Alt + 좌/우 : 창을 좌/우로 이동한다. 각 창에 커서는 원래 위치한 곳으로. 
+  - Alt + 좌/우 : 창을 좌/우로 이동한다. 각 창에 커서는 원래 위치한 곳으로.
 
 2. 실행
   - Alt + Shift + E : 특정 범위만 console에서 실행

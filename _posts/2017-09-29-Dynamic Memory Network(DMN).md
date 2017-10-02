@@ -36,7 +36,7 @@ input에서는 hidden state를 attention을 위해서 전부다 사용하지만 
 
 **3) Episodic Memory Network** <br>
 episodic memory module은 여기서 처음 등장하는 개념인데 여러 층으로 이루어지며 각 층에는 input값에 매칭되는 episode값이 존재한다.
-episode $$e^i$$는 attention mechanism을 이용해서 생성되고 이 때, input값인 fact representation $$c$$와 question representation $$q$$와 이전 memory $$m^{i-1}를 참조한다.
+episode $$e^i$$는 attention mechanism을 이용해서 생성되고 이 때, input값인 fact representation $$c$$와 question representation $$q$$와 이전 memory $$m^{i-1}$$를 참조한다.
 이렇게 만든 각 층의 episode는 해당 층의 memory를 만들 때 쓰이며 GRU를 사용한다. 최종적으로 마지막 episodic memory 층의 마지막 memory는
 answer module로 전달된다.
 
