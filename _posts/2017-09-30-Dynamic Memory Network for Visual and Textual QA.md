@@ -19,7 +19,7 @@ GRU를 이용한 DMN을 앞선 논문에서 살펴보았고 기존에 input modu
 기존 DMN에서 DMN+로 넘어오면서 크게 두가지가 변경되었다. 첫째는 input module의 변화(*Text, Vision으로 나뉘어진다.*)이고
 둘째는 attention mechanism, 셋째는 memory update 방식이다. 순서대로 살펴보도록 하자.
 
-1. Input Module for Text QA
+### 1) Input Module for Text QA
 기존 Text QA의 경우를 먼저보자. (*뒤에서 Vision QA에 대해서도 따로 볼 예정이다.*)
 input module의 문제점이 두 가지가 존재한다. 첫째는 GRU를 정보 전달하는 모델로 사용해서
 단방향으로만 정보가 전달된다는 단점이 있다. 또한, supporting sentence가 먼 경우에 서로 상호작용이 어려워진다는
@@ -44,7 +44,7 @@ $$\begin{align}
 \overleftrightarrow{f_i} &= \overleftarrow{f_i} + \overrightarrow{f_i}
 \end{align}$$
 
-2. Input Module for VQA
+### 2) Input Module for VQA
 이미지에 대한 QA를 위해서 새롭게 도입한 input module이다. 기존에 computer vision 쪽에서 살펴봤던 ***captioning,
 object segmentation*** 에서 이미지를 다룰 때의 내용과 유사하여 쉽게 이해할 수 있었다.
 Visual input module은 각기 다른 역할을 하는 3가지 구성요소로 이루어진다.
@@ -60,7 +60,7 @@ textual feature space로 투영시킨다. <br>
 ***input fusion layer*** 에서는 위에서 embedding까지 끝난 정보를 bi-directional GRU에 흘려준다. Bi-GRU를 사용하는 이유는
 앞서 설명한 내용과 동일하다.
 
-3. The Episodic Memory Module
+### 3) The Episodic Memory Module
 DMN+에서의 episodic memory module은 DMN에서 식, attention 부분만 조금 바뀌고 구조 자체는 거의 그대로이다.
 먼저 변하지 않은 전체적인 구성을 본 뒤에 부분적으로 변한 부분을 보도록 하자.
 표기법을 나타내고 아래에 식을 정의하도록 하자. ($$q$$는 question, $$m^{t-1}$$은 이전 memory, \overleftrightarrow{f_i}는 $$i^{th}$$ fact,
@@ -91,7 +91,7 @@ h_i &= g_i^t GRU(c_i, h_{i-1}) + (1-g_i^t)h_{i-1} \\
 $$g_i^t$$가 scalar라서 vector인 $$u_i$$보다 시각화가 쉬워서 그림에 대해서 위치 별로 attention 정도를 나타낼 수 있다.
 그리고 memory update를 위한 $$c^t$$는 기존과 마찬가지로 마지막 hidden state 값을 넘겨준다.
 
-4. Episodic Memory Updates
+### 4) Episodic Memory Updates
 마지막으로 살펴볼 것은 episodic memory update 방식이다. 기존에 GRU를 통해서 memory update를 해줬는데
 이 논문에선 Sukhbaatar et al. 의 예시를 들면서 episodic pass 내에서 전부다 같은 것보다 update의 weight가
 다른게 성능 면에서 유리하다고 얘기하고 있다. 그래서 update 시에 ***GRU 대신 ReLU*** 를 사용한다. (0.5% 성능 향상) <br>
@@ -107,7 +107,7 @@ h_i &= g_i^t GRU(c_i, h_{i-1}) + (1-g_i^t)h_{i-1} \\
 \end{align}$$
 
 ## Experiments
-1. Text QA Results
+### 1) Text QA Results
 DMN(이전 모델), DMN2(input layer -> input fusion layer), DMN3(soft attention -> attention based GRU), DMN+(untied model)
 을 살펴보면서 구성요소 각각이 변화했을 때 성능이 달라짐을 확인한다. 아래 결과 비교를 통해 DMN -> DMN2에서 fact들 간 상호작용이 개선되었고
 DMN2 -> DMN3에서 위치, 순서 정보가 보존되었고 DMN3 -> DMN+ 에서 DMN+가 DMN3 대비 overfitting 경향을 보이면서 성능이 향상되었음을 알 수 있다.
@@ -116,7 +116,7 @@ DMN2 -> DMN3에서 위치, 순서 정보가 보존되었고 DMN3 -> DMN+ 에서 
 이 외에 End-to-End Memory Network와 Neural Reasoner 모델과 비교한 결과도 논문엔 나타나있으나 성능이 좋은 편이라는 결과를 제외하고 별 다른
 비교해석이 없어서 생략하도록 하겠다.
 
-2. Comparison to SOTA using VQA
+### 2) Comparison to SOTA using VQA
 아래 표에서 보듯이 VQA 관련 많은 항목들에서 SOTA 성능을 보인다. 정성적으로 attention gate $$g_i^t$$를 그림에 나타내보면
 질문에 대한 대답을 적절하게 인식하고 있는 것을 확인할 수 있다.
 ![DMN+ VQA result](https://whikwon.github.io/images/NLP_DMN+_VQA_result.png)
@@ -126,3 +126,4 @@ DMN2 -> DMN3에서 위치, 순서 정보가 보존되었고 DMN3 -> DMN+ 에서 
 
 
 Reference: <br>
+Caiming Xiong, Stephen Merity, Richard Socher. [Dynamic Memory Networks for Visual and Textual Question Answering](https://arxiv.org/pdf/1603.01417). 2016.
