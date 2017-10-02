@@ -16,8 +16,8 @@ GRU를 이용한 DMN을 앞선 논문에서 살펴보았고 기존에 input modu
 <center> <i> &lt;DMN+ 구조&gt;</i> </center> <br>
 
 ## Improved Dynamic Memory Networks: DMN+
-기존 DMN에서 DMN+로 넘어오면서 크게 두가지가 변경되었다. 첫째는 input module의 변화이고
-둘째는 attention mechanism과 memory update 방식이다. 순서대로 살펴보도록 하자.
+기존 DMN에서 DMN+로 넘어오면서 크게 두가지가 변경되었다. 첫째는 input module의 변화(*Text, Vision으로 나뉘어진다.*)이고
+둘째는 attention mechanism, 셋째는 memory update 방식이다. 순서대로 살펴보도록 하자.
 
 1. Input Module for Text QA
 기존 Text QA의 경우를 먼저보자. (*뒤에서 Vision QA에 대해서도 따로 볼 예정이다.*)
@@ -107,9 +107,22 @@ h_i &= g_i^t GRU(c_i, h_{i-1}) + (1-g_i^t)h_{i-1} \\
 \end{align}$$
 
 ## Experiments
+1. Text QA Results
 DMN(이전 모델), DMN2(input layer -> input fusion layer), DMN3(soft attention -> attention based GRU), DMN+(untied model)
 을 살펴보면서 구성요소 각각이 변화했을 때 성능이 달라짐을 확인한다. 아래 결과 비교를 통해 DMN -> DMN2에서 fact들 간 상호작용이 개선되었고
 DMN2 -> DMN3에서 위치, 순서 정보가 보존되었고 DMN3 -> DMN+ 에서 DMN+가 DMN3 대비 overfitting 경향을 보이면서 성능이 향상되었음을 알 수 있다.
 ![DMN to DMN+](https://whikwon.github.io/images/NLP_DMN_to_DMN+.png)
+<center> <i> &lt;DMN, DMN2, DMN3, DMN+ 각 구성요소 변화 별 성능 비교&gt;</i> </center> <br>
+이 외에 End-to-End Memory Network와 Neural Reasoner 모델과 비교한 결과도 논문엔 나타나있으나 성능이 좋은 편이라는 결과를 제외하고 별 다른
+비교해석이 없어서 생략하도록 하겠다.
+
+2. Comparison to SOTA using VQA
+아래 표에서 보듯이 VQA 관련 많은 항목들에서 SOTA 성능을 보인다. 정성적으로 attention gate $$g_i^t$$를 그림에 나타내보면
+질문에 대한 대답을 적절하게 인식하고 있는 것을 확인할 수 있다.
+![DMN+ VQA result](https://whikwon.github.io/images/NLP_DMN+_VQA_result.png)
+<center> <i> &lt;VQA 와 기타 모델 성능 비교&gt;</i> </center> <br>
+![DMN+ VQA result2](https://whikwon.github.io/images/NLP_DMN+_VQA_result2.png)
+<center> <i> &lt;VQA attention gate 확인 결과&gt;</i> </center> <br>
+
 
 Reference: <br>
