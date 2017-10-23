@@ -49,6 +49,7 @@ comments: true
 3. 이동
   - Alt + 1 : project 파일 list로 이동
   - Alt + 3 : console로 이동
+  - Alt + 6 : TODO list로 이동
   - Alt + F12 : terminal(cmd)로 이동
   - ESC : escape, 작성 중이던 script로 이동하거나 실행창을 끈다.
   - Ctrl + Shift + F7 : 해당 이름의 변수/함수를 highlight한 뒤에 F3을 누르면 이동할 수 있도록 한다.
@@ -62,3 +63,6 @@ comments: true
   - Ctrl + D : 윗 줄 복사
   - Ctrl + Shift + J : 아래 줄 끌어올려서 한 줄로 만들기
   - Ctrl + / : comment/uncomment
+
+5. 기타
+  - # TODO [할 일]: TODO-List 작성

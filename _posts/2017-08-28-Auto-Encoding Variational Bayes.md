@@ -14,7 +14,7 @@ comments: true
 둘째는 marginal likelihood of observed data의 lower bound를 끌어내기 위해서 사용한다. 목적은 model selection하기 위함으로 marginal likelihood가
 높으면 data에 더 잘 fit할 것이라는 아이디어에서 출발한다.
 
-### mean-field approximation
+## mean-field approximation
 
 variational inference에서 위에서 얘기한 것처럼 latent variable $$z$$의 data $$X$$가 주어졌을 때의 posterior distribution을
 구하는게 목적으로 사용되는데 intractable하니 근사하기 위해서 variational distribution을 이용한다.

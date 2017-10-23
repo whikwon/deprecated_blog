@@ -6,7 +6,7 @@ comments: true
 
 - NMT에 Attention mechanism을 활용한 모델이다.
 
-### Introduction
+## Introduction
 
 *Neural machine translation* 는 주로 *encoder-decoder* 구조로 이루어져 있으며 encoder는
 translation하려는 source sentence를 fixed-length vector로 encode하고 decoder는 vector를
@@ -26,7 +26,7 @@ previous generated target words에 더해서 학습한 source sentence의 위치
 
 그래서 결과적으로 더 긴 sentence를 다루었을 때 기존 대비 좋은 성능을 내었다.
 
-### Learning to align and translate
+## Learning to align and translate
 
 논문에서 사용한 모델의 기본적인 구조를 설명한다. encoder는 **bidirectional RNN** 으로 이루어져있고
 decoder는 **attention mechanism이 추가된 RNN** 을 사용하였다. 기본적인 구조는 아래와 같다.
@@ -61,7 +61,7 @@ decoder는 **attention mechanism이 추가된 RNN** 을 사용하였다. 기본�
   $$h_j = {\big {[} \overrightarrow {h_j}^T; \overleftarrow {h_j}^T \big {]}}^T$$
   의 annotation을 얻을 수 있다. 이 annotation은 decoder에서 context vector를 구할 때 사용된다.
 
-### Experiment setting
+## Experiment setting
 
 논문에서는 English-to-French translation에 대한 평가로 성능을 확인한다.
 조경현 교수님의 14년도 [논문](https://arxiv.org/pdf/1406.1078)의 RNN Encoder-Decoder의 구조를  
@@ -69,7 +69,7 @@ decoder는 **attention mechanism이 추가된 RNN** 을 사용하였다. 기본�
 기존 모델인 RNNencdec와 attention이 적용된 RNNsearch 각각에 대해 ~30, ~50 길이(word)의 sentence로
 학습을 시켰으며 최종적으로 학습이 끝난 후 *beam search* 를 사용해서 가장 조건부 확률이 높은 값을 결과로 얻었다.<br>
 
-### Results
+## Results
 
   - **Quantitative Results** <br>
   아래 결과를 보면 BLEU score를 보면 전반적으로 RNNsearch가 기존 모델인 RNNenc를 성능 면에서 압도하는 것을 볼 수 있다.
@@ -89,7 +89,7 @@ decoder는 **attention mechanism이 추가된 RNN** 을 사용하였다. 기본�
   그리고 (d)를 통해서 soft alignment의 장점을 알 수 있다고 한다. (*이해가 잘 안됨..*)
 
 
-### Conclusion
+## Conclusion
 
 NMT 접근 방식 중 하나인 *encoder-decoder* 기존 방식의 문제점으로 input sentence를 fixed-length vector
 로 다룬다는 점이 지적이 되었고 논문에서 이를 attention mechanism을 통해 해결하는 방식을 취한다. <br>
