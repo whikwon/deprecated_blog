@@ -24,9 +24,9 @@ Attention Sum Reader Network(AS Reader)는 아래 그림과 같은 구조를 가
 <center> <i> &lt;Attention Sum Reader Network 구조&gt;</i> </center> <br>
 
 ## 이전 모델과의 비교
-1) Attentive and Impatient Reader : 기본적인 모델의 구조를 차용했으며 답의 확률을 구하는 방식이 다르다. 문서 내 전체 단어에 대해서 가중치 합을 구하는 방식(*soft attention*, $r = \sum_i s_i f_i(\textbf{d})$)을 취하는데, 이럴 경우에 January와 March가 둘 다 답이 될 수 있는 경우 February라는 답이 나오곤 한다. 대신 AS Reader에서는 같은 단어들에 대해서만 확률을 합치므로 명확하게 January 혹은 March로
+1) Attentive and Impatient Reader : 기본적인 모델의 구조를 차용했으며 답의 확률을 구하는 방식이 다르다. 문서 내 전체 단어에 대해서 가중치 합을 구하는 방식(*soft attention*, $$r = \sum_i s_i f_i(\textbf{d})$$)을 취하는데, 이럴 경우에 January와 March가 둘 다 답이 될 수 있는 경우 February라는 답이 나오곤 한다. 대신 AS Reader에서는 같은 단어들에 대해서만 확률을 합치므로 명확하게 January 혹은 March로
 답이 나오게 된다. <br>
-2) Chen et al. 2016 : attention weight 계산 방식이 다르다. 단순한 dot product를 사용하는 AS Reader와 달리 bilinear term을 사용한다. ($s_i \propto exp(f_i(\textbf{d})^T W g(\textbf{q}))$)
+2) Chen et al. 2016 : attention weight 계산 방식이 다르다. 단순한 dot product를 사용하는 AS Reader와 달리 bilinear term을 사용한다. ($$s_i \propto exp(f_i(\textbf{d})^T W g(\textbf{q}))$$)
 위의 Attentive and Impatient Reader에서 파생된 모델로 attention을 구하는 방식은 그대로지만 성능은 더 좋게 나온다고 한다. <br>
 3) Pointer Networks : 답을 구하는 방식에 대해 가장 영향을 많이 받은 모델이다. 전체 단어에 대해서 가중치 합을 구하는 방식이 아닌 특정 단어에 대해서만 확률을 구하는 방식을 사용하고
 차이점은 Ptr-Net은 MT에서 rare words 문제를 해결해주기 위해 나온 모델이므로 encoder-decoder 구조를 가지고 있다.
