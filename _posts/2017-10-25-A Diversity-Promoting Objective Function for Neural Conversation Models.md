@@ -22,7 +22,7 @@ $$S(message)$$가 주어졌을 때 $$T(response)$$의 가장 높은 확률의 �
 응답들이 나오게 모델이 학습되고 이게 decode 때에도 반영되어, *I don't know, I'm OK* 와 같은 일반적이고 의미없는 응답이 생성되게 된다.  
 
 위와 같은 문제를 완화하기 위해서 MMI를 목적 함수로 제시한다. MMI의 maximum log likelihood는 아래와 같다.
-아래 식은 $S$$, $$T$$ 대한 mutual information 모두를 고려해서 모델을 학습한다는 내용을 나타낸다.
+아래 식은 $$S$$, $$T$$ 대한 mutual information 모두를 고려해서 모델을 학습한다는 내용을 나타낸다.
 $$\begin{align}
 \hat T &= \underset T {argmax} \{log \frac {p(S, T)} {p(S)p(T)}\} \\
 &= \underset T {argmax} \{log\ p(T|S) - log\ p(T)\}
@@ -37,7 +37,7 @@ $$S$$와 $$T$$ 상호 간에 영향을 미치고 그 결과로 모델이 학습�
 $$\begin{align}
 \hat T &= \underset T {argmax} \{(1 - \lambda)log\ p(T|S) + \lambda log\ p(S|T) - \lambda log\ p(S)\} \\
 &= \underset T {argmax} \{(1 - \lambda)log\ p(T|S) + \lambda log\ p(S|T)\} \\
-\end{align}$$
+\end{align}$$ <br>
 
 위에서 소개한 MMI 방법이 음성 인식에서 사용하고 있는데, seq2seq 모델을 학습할 때에는 *empirically nontrivial* 하여 학습 시에는 maximum likelihood로,
 테스트(decode) 시에만 MMI를 사용해준다.
@@ -50,7 +50,7 @@ practical하게 사용할 때 위에서 본 두 가지 식을 모두 사용할 �
 $$\begin{align}
 U(T) &= \displaystyle \prod_{i=1}^{N_t} p(t_k | t_1, t_2, ..., t_{k-1}) \cdot g(k) \\
 p(T) &= \displaystyle \prod_{k=1}^{N_t} p(t_k|t_1, t_2, ..., t_{k-1})
-\end{align}$$
+\end{align}$$ <br>
 위 식에서 보듯이 생성되는 단어 길이에 따라 가중치를 두는 형식인데 처음 생성되는 단어에는 penalty를 주고 어느 정도 진행되면 penalty를 없애는 방식이다.
 첫 단어가 이 후에 생성될 단어를 크게 결정하기 때문에 중요하기 때문이고, 이 후에 penalty를 없애 모델이 결정하게 둠으로써 문법적인 에러를 막는다는 생각이다.
 (*실제 응답의 뒷 부분에서 문법적인 에러가 주로 발생한다고 한다.*)
@@ -62,7 +62,7 @@ $$\begin{equation}
       1, & \text{if}\ k \leq \gamma \\
       0, & \text{if}\ k > \gamma
   \end{cases}
-\end{equation}$$
+\end{equation}$$ <br>
 최종적으로 MMI-antiLM의 목적 함수는 $$log\ p(T|S) - \lambda log\ U(T)$$로 나타낼 수 있다.
 
 2) MMI-bidi: $$(1 - \lambda)log\ p(T|S) + \lambda log\ p(S|T)$$, decoding을 intractable하게 만들 수 있다.
@@ -73,12 +73,11 @@ $$\begin{equation}
 
 ## 데이터셋
 
-
 ## 학습 조건
 
 ## 평가 방법
 
-
 ## 성능
+
 Reference: <br>
 Jiwei Li, Michel Galley, Chris Brockett, Jianfeng Gao, Bill Dolan. [A Diversity-Promoting Objective Function for Neural Conversation Models](https://arxiv.org/pdf/1510.03055). 2015.

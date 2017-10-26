@@ -17,11 +17,11 @@ Multiresolution RNN(MrRNN)는 아래 그림과 같은 구조를 가지며 크게
 1) Coarse representation <br>
 - encoder: embedded된 coarse token을 받아서 encoding을 한 뒤 마지막 hidden state를 decoder로 넘겨준다.
 - decoder: encoder의 마지막 hidden state 값을 받아 decoding을 한다.
-- prediction encoder: decoder에서 generated된 token을 encoding해서 vector로 만든다.
+- prediction encoder: decoder에서 generated된 token을 encoding해서 vector로 만든다. <br>
 2) Natural language representation <br>
 - encoder: embedded된 natural language token을 받아서 encoding을 한 뒤 마지막 hidden state를 decoder로 넘겨준다.
 - embedding: encoder의 마지막 hidden state와 위 coarse 처리 시 prediction encoder에서 나오는 vector를 합쳐준다.
-- decoder: coarse의 high-level 정보와 natural language 정보를 합쳐서 decoding을 한다. <br>
+- decoder: coarse의 high-level 정보와 natural language 정보를 합쳐서 decoding을 한다. <br><br>
 ![structure](https://whikwon.github.io/images/NLP_multiresolution_structure.png) <br>
 <center> <i> &lt;Multiresolution RNN 구조&gt;</i> </center> <br>
 
@@ -55,7 +55,7 @@ MrRNN의 성능은 아래와 같다. <br>
 ![result1](https://whikwon.github.io/images/NLP_multiresolution_result.png) <br>
 <center> <i> &lt;MrRNN의 Ubuntu Dialog Corpus 대한 평가 결과&gt;</i> </center> <br>
 
-![result2](https://whikwon.github.io/images/NLP_multiresolution_result2.png.png) <br>
+![result2](https://whikwon.github.io/images/NLP_multiresolution_result2.png) <br>
 <center> <i> &lt;MrRNN의 Twitter Dialogue Corpus에 대한 평가 결과&gt;</i> </center> <br>
 
 ![example](https://whikwon.github.io/images/NLP_multiresolution_example.png) <br>
