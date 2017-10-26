@@ -17,15 +17,15 @@ Maximum likelihood가 일반적인, 안전한 응답을 생성하는 이유는 �
 
 ## 모델 구조
 기본적인 Seq2seq 모델을 사용하고 MMI에 대해서만 덧붙여서 설명을 하도록 하겠다.
-기존에 다른 모델들에서 사용하던 목적 함수 대한 maximum log likelihood는 $$\hat T =  \underset T {{arg}{max}} \{log\ p(T|S) \}$$ 로 나타낼 수 있다.
+기존에 다른 모델들에서 사용하던 목적 함수 대한 maximum log likelihood는 $$\hat T =  \underset T {argmax} \{log\ p(T|S) \}$$ 로 나타낼 수 있다.
 $$S(message)$$가 주어졌을 때 $$T(response)$$의 가장 높은 확률의 값을 택하는 것이다. 그러다보니 기존 데이터로 학습하면 많은 메세지에 대한 확률이 높은
 응답들이 나오게 모델이 학습되고 이게 decode 때에도 반영되어, *I don't know, I'm OK* 와 같은 일반적이고 의미없는 응답이 생성되게 된다.  
 
 위와 같은 문제를 완화하기 위해서 MMI를 목적 함수로 제시한다. MMI의 maximum log likelihood는 아래와 같다.
 아래 식은 $S$$, $$T$$ 대한 mutual information 모두를 고려해서 모델을 학습한다는 내용을 나타낸다.
 $$\begin{align}
-\hat T &= \underset T {{arg}{max}} \{log \frac {p(S, T)} {p(S)p(T)}\} \\
-&= \underset T {{arg}{max}} \{log\ p(T|S) - log\ p(T)\}
+\hat T &= \underset T {argmax} \{log \frac {p(S, T)} {p(S)p(T)}\} \\
+&= \underset T {argmax} \{log\ p(T|S) - log\ p(T)\}
 \end{align}$$
 
 식에서 $$log\ p(T|S)$$는 위에서 설명한 ML에서의 항과 동일하고, 중요한게 뒤에 추가된 $$log\ p(T)$$이다. 이 항은 $$T(response)$$ 자체적인 확률 분포를
@@ -35,8 +35,8 @@ $$\begin{align}
 그래서 위 식에 $$\lambda$$ 항을 $$\log\ p(T)$$ 붙여서 조절을 해주고 식을 정리하면 아래와 같다. 정리된 식을 보면
 $$S$$와 $$T$$ 상호 간에 영향을 미치고 그 결과로 모델이 학습이 될 것이다.
 $$\begin{align}
-\hat T &= \underset T {{arg}{max}} \{(1 - \lambda)log\ p(T|S) + \lambda log\ p(S|T) - \lambda log\ p(S)\} \\
-&= \underset T {{arg}{max}} \{(1 - \lambda)log\ p(T|S) + \lambda log\ p(S|T)\} \\
+\hat T &= \underset T {argmax} \{(1 - \lambda)log\ p(T|S) + \lambda log\ p(S|T) - \lambda log\ p(S)\} \\
+&= \underset T {argmax} \{(1 - \lambda)log\ p(T|S) + \lambda log\ p(S|T)\} \\
 \end{align}$$
 
 위에서 소개한 MMI 방법이 음성 인식에서 사용하고 있는데, seq2seq 모델을 학습할 때에는 *empirically nontrivial* 하여 학습 시에는 maximum likelihood로,
