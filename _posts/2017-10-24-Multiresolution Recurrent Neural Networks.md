@@ -14,10 +14,12 @@ decoding할 때 반영이 되도록 해주는 것이라고 생각할 수 있다.
 
 ## 모델 구조
 Multiresolution RNN(MrRNN)는 아래 그림과 같은 구조를 가지며 크게 Coarse, Natural Language token을 처리하는 부분으로 나뉜다. <br>
+
 1) Coarse representation <br>
 - encoder: embedded된 coarse token을 받아서 encoding을 한 뒤 마지막 hidden state를 decoder로 넘겨준다.
 - decoder: encoder의 마지막 hidden state 값을 받아 decoding을 한다.
 - prediction encoder: decoder에서 generated된 token을 encoding해서 vector로 만든다. <br>
+
 2) Natural language representation <br>
 - encoder: embedded된 natural language token을 받아서 encoding을 한 뒤 마지막 hidden state를 decoder로 넘겨준다.
 - embedding: encoder의 마지막 hidden state와 위 coarse 처리 시 prediction encoder에서 나오는 vector를 합쳐준다.
