@@ -6,7 +6,7 @@ comments: true
 - 2016년에 DeepMind에서 발표한 논문이다.
 
 ***
-#### 1. introduction <br>
+### 1. introduction <br>
 Neural network의 최적의 weight를 구하기 위해서는 input에 대한 output 값을 구하고 loss를 구한 뒤에 forward,
 back propagation을 통해 각각의 weight의 gradient를 update해주어야 한다. <br>
 이 과정은 순서에 따라서 진행되어 이전 과정이 진행되지 않았을 경우 이 후 과정이 진행되지 못하는 ***locking*** 이 일어난다.
@@ -22,7 +22,7 @@ $$\frac {\partial L} {\partial \theta_i} = f_Bprop((h_i, x_i, y_i, \theta_i),...
 뒤에서 RNN에의 적용 예제를 보면서 어떤 방식으로 적용되는 지 살펴보겠다.
 
 ***
-#### 2. Decoupled Neural Interfaces
+### 2. Decoupled Neural Interfaces
 asynchronously learning 할 수 있는 high-level communication protocol을 먼저 소개하겠다. <br>
 ![Figure1](https://norman3.github.io/papers/images/synthetic_gradients/f03.png) <br>
 $$(f_A,f_B:\ model,\ h_A: \ output\ of\ model A,\ M_B: feedback\ model, c: other\ information,\ S_B:\ state\ of\ B,\ \hat \delta_A: synthetic\ gradient,\ \|\delta_A - \hat \delta_A\|:\ Loss\ for\ M_B)$$ <br><br>
@@ -32,7 +32,7 @@ $$(f_A,f_B:\ model,\ h_A: \ output\ of\ model A,\ M_B: feedback\ model, c: other
 ![DNI flow](https://storage.googleapis.com/deepmind-live-cms-alt/documents/3-6.gif)
 
 ***
-#### 2.1 Synthetic Gradient for Recurrent Networks
+### 2.1 Synthetic Gradient for Recurrent Networks
 RNN에 적용한 결과를 설명한다. <br>
 RNN이 무한히 전개된다고 생각했을 때를 생각해보면 $$N \to \infty$$가 되면서 $$F_1^{\infty}$$인 RNN이 된다. (아래 그림과 참조.) <br>
 ![RNN infinite](https://storage.googleapis.com/deepmind-live-cms-alt/images/3-7.width-1500_jiACRLG.png) <br><br>
@@ -49,7 +49,7 @@ backpropagation을 한 효과, 즉 longer temporal dependencyy를 얻을 수 있
 target gradient라는 개념을 사용해서 bootstrapping으로 구한다고 한다. (***나중에 배우면 update 예정***)
 
 ***
-#### 2.2 Synthetic Gradient for Feed-Forward Networks
+### 2.2 Synthetic Gradient for Feed-Forward Networks
 Update 예정.
 
 

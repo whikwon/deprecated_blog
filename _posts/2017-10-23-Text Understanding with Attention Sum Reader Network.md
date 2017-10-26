@@ -31,6 +31,9 @@ Attention Sum Reader Network(AS Reader)는 아래 그림과 같은 구조를 가
 3) Pointer Networks : 답을 구하는 방식에 대해 가장 영향을 많이 받은 모델이다. 전체 단어에 대해서 가중치 합을 구하는 방식이 아닌 특정 단어에 대해서만 확률을 구하는 방식을 사용하고
 차이점은 Ptr-Net은 MT에서 rare words 문제를 해결해주기 위해 나온 모델이므로 encoder-decoder 구조를 가지고 있다.
 
+## 데이터셋
+CNN, Daily Mail, Children's Book Test
+
 ## 학습 조건
 - optimizer: Adam optimizer
 - learning rate: 0.001/0.0005
