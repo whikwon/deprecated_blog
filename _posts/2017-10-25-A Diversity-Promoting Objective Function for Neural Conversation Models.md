@@ -46,7 +46,7 @@ $$\begin{align}
 
 practical하게 사용할 때 위에서 본 두 가지 식을 모두 사용할 수 있으며 각각의 특징이 달라 살펴보도록 하자. <br>
 1) MMI-antiLM: $$log\ p(T|S) - \lambda log\ p(T)$$, 두번째 항이 빈도 높고 일반적인 응답에만 penalty를 주는게 아니여서
-일반적인 문장이 문법적으로 맞지 않게 변형할 수 있다. $$\lambda$$의 값에 의해서 결정된다고 한다. 이 문제를 해결하기 위해서 $$p(T)$$ 대신 $$U(T)$$를 사용한다.
+일반적인 문장이 문법적으로 맞지 않게 변형할 수 있다. $$\lambda$$의 값에 의해서 결정된다고 한다. 이 문제를 해결하기 위해서 $$p(T)$$ 대신 $$U(T)$$를 사용한다. <br>
 $$\begin{align}
 U(T) &= \displaystyle \prod_{i=1}^{N_t} p(t_k | t_1, t_2, ..., t_{k-1}) \cdot g(k) \\
 p(T) &= \displaystyle \prod_{k=1}^{N_t} p(t_k|t_1, t_2, ..., t_{k-1})
