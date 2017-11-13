@@ -56,7 +56,7 @@ p_u: \text{u번째 user vector}\ (p_u \in \mathbb{R}^f)\\
 r_{ui}: \text{i번째 item에 대한 u번째 user의 실제 선호도} \\
 \hat r_{ui} = q_i^Tp_u: \text{i번째 item에 대한 u번째 user의 예측 선호도} \\
 $$ <br>
-위 식을 보면 우리는 user의 item에 대한 실제 선호도와 예측 선호도가 같은 방향으로 $q_i, p_u$를 학습시키면 좋은 결과를 얻을 수 있다.
+위 식을 보면 우리는 user의 item에 대한 실제 선호도와 예측 선호도가 같은 방향으로 $$q_i, p_u$$를 학습시키면 좋은 결과를 얻을 수 있다.
 아직 MF의 목적 함수를 소개하기 전에 SVD와도 비슷한데 사용하지 않는 이유에 대해 짚고 넘어가겠다. (*SVD도 latent factor를 이용해서 데이터를 나타낼 수 있다.*)
 이는 SVD가 결측값이 많은 sparse matrix형태의 데이터를 다룰 수 없기 때문인데 이를 해결하기 위해서
 결측값을 여러 가지 방법으로 채울 경우에는 연산량이 많아지고 부정확해져서 사용하지 않는다.
@@ -121,5 +121,5 @@ $$\underset {q^{\star} p^{\star} b^{\star}} {min} \displaystyle \sum_{(u,i)\in \
 ![neighborhood method](https://whikwon.github.io/images/rec_netflix_performance.png)
 <center> <i> &lt;Tuning에 따른 Matrix factorization 모델의 성능&gt;</i> </center> <br>
 
-
+Reference: <br>
 [Yehuda Koren. Matrix Factorization Techniques for Recommender System. IEEE. 2009.](https://endymecy.gitbooks.io/spark-ml-source-analysis/content/%E6%8E%A8%E8%8D%90/papers/Matrix%20Factorization%20Techniques%20for%20Recommender%20Systems.pdf)
