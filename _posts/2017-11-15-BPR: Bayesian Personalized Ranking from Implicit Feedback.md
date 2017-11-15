@@ -37,10 +37,10 @@ $$\begin{align}
 \end{align}$$
 
 그리고 위 식에서 $$\delta$$는 indicator function로 우리는 $$D_S$$에 속할 경우 1, 나머지는 0으로 줘서 아래 식으로 정리가 가능하다.  
-<center> $$\prod_{u \in U} p(>_u \lvert \Theta) &= \prod_{(u,i,j) \in D_S} p(i>_u j \lvert \Theta)$$ </center>
+<center> $$\prod_{u \in U} p(>_u \lvert \Theta) = \prod_{(u,i,j) \in D_S} p(i>_u j \lvert \Theta)$$ </center>
 
 그리고 이 확률 식을 $$\Theta$$에 대해 학습한 모델(kNN, MF...) 값의 sigmoid 식과 같다고 놓는다.
-<center> $$p(i >_u j \lvert \Theta) &:= \sigma(\hat x_{uij}(\Theta))$$ </center>
+<center> $$p(i >_u j \lvert \Theta) := \sigma(\hat x_{uij}(\Theta))$$ </center>
 
 이제 다시 처음으로 돌아가서 $$\normalsize {\text{BPR-O}} \small {\text{PT}}$$를 정의할 차례이다. 하나 빠진 부분이 있는데
 prior인 $$p(\Theta)$$는 normal distribution으로 놓는다.($$p(\Theta) \sim N(0, \sigma_{\Theta}$$) 이제 구성 요소가 다 모였다.
