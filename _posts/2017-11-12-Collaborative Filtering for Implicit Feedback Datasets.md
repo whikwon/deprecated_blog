@@ -27,8 +27,8 @@ comments: true
 ## 모델 소개
 먼저 기존 목적 함수를 보면 latent factor로 user와 item의 특징을 나타내고 이 둘을 내적한 값을 예상 평점이라 하고 진짜 평점과의 차이를 최소화하는 방향으로
 학습한다. <br>
-$$\underset {x_{\star}, y_{\star}} {min} \displaystyle \sum_{r_{u,i\ \text{is known}}} (r_{ui} - x_u^T y_i)^2 + \lambda (\lVert x_u \rVert^2 + \lVert y_i \rVert^2)$$ <br>
-$$r_{u,i}$$는 진짜 평점, $$x_u, y_i$$는 각각 latent factor로 이루어진 user, item vector이다. <br>
+<center> $$\underset {x_{\star}, y_{\star}} {min} \displaystyle \sum_{r_{u,i\ \text{is known}}} (r_{ui} - x_u^T y_i)^2 + \lambda (\lVert x_u \rVert^2 + \lVert y_i \rVert^2)$$ </center> <br>
+<center> ($$r_{u,i}$$는 진짜 평점, $$x_u, y_i$$는 각각 latent factor로 이루어진 user, item vector이다.) </center>
 
 Implicit의 경우에는 평점이라는 개념이 없으므로 항을 약간 수정해야 한다. 먼저, 평점은 선호도($$p_{ui}$$)과 신뢰도($$c_{ui}$$)의 2개 항으로 나뉜다.
 두 항 모두 우리가 얻은 feedback($$r_{ui}$$)로 부터 결정된다. $$r_{ui}$$는 구매한 횟수, 마우스 클릭 수, 브라우저에 머문 시간 등을 나타낸다.
@@ -39,18 +39,19 @@ Implicit의 경우에는 평점이라는 개념이 없으므로 항을 약간 �
 
 이를 식으로 나타내면 아래와 같다. 위에서 해석한 대로 수식이 구성되며 신뢰도($$c_{ui}$$)의 경우는 hyperparameter인 $$\alpha$$가 추가되는데
 이는 $$r_{ui}$$가 커짐에 따라 얼마나 가중치를 부여할 지 결정해준다. 논문에서는 $$\alpha = 40$$에서 좋은 성능을 낸다고 소개한다.
-$$p_{ui}=\left\{
+
+<center> $$p_{ui}=\left\{
             \begin{array}{ll}
               1\ \text{if}\ r_{ui} > 0 \\
               0\ \text{else}\ r_{ui} = 0
             \end{array}
-        \right. \\c_{ui} = 1 + \alpha r_{ui}$$
+            \right. \\c_{ui} = 1 + \alpha r_{ui}$$ </center>
 
-목적 함수를 수정해서 다시 정리하면
-$$\underset {x_{\star}, y_{\star}} {min} \displaystyle \sum_{u, i} c_{ui}(p_{ui} - x_u^T y_i)^2 + \lambda (\sum_u \lVert x_u \rVert^2 + \sum_i \lVert y_i \rVert^2)$$ 이다.
+목적 함수를 수정해서 다시 정리하면 아래와 같은 식을 얻을 수 있다.
+<center> $$\underset {x_{\star}, y_{\star}} {min} \displaystyle \sum_{u, i} c_{ui}(p_{ui} - x_u^T y_i)^2 + \lambda (\sum_u \lVert x_u \rVert^2 + \sum_i \lVert y_i \rVert^2)$$ </center>
 
 위에서 정의한 목적 함수를 Alternating Least Squares(ALS)를 사용해서 학습시킨다. $$x_u, y_i$$에 대해 update하는 식은
-$$\begin{align} x_u &= (Y^T C^u Y + \lambda I)^{-1} Y^T C^u p(u)$$ \\
+$$\begin{align} x_u &= (Y^T C^u Y + \lambda I)^{-1} Y^T C^u p(u) \\
 y_i &= (X^T C^i X + \lambda I)^{-1} X^T C^i p(i)
 \end{align}$$
 으로 자세한 유도는 [stackoverflow](https://math.stackexchange.com/questions/1072451/analytic-solution-for-matrix-factorization-using-alternating-least-squares/1073170#1073170)를 참조하자. 전체 $$m \times n$$의 matrix로 user-item 데이터가 이루어져 있다고 하고 각각의 user, item은 $$f$$개의 factor로 나타난다고 하자. $$mathcal{N}$$은 데이터 중 non-zero observation의 개수이다.
