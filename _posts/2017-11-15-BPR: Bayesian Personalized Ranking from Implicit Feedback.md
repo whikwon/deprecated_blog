@@ -14,7 +14,7 @@ $$\normalsize {\text{L}} \small {\text{EARN}} \normalsize {\text{BPR}}$$는 SGD�
 4. 개인화 ranking에서의 $$\text{BPR}$$의 성능이 기존 학습 방법 대비 좋다는 것을 보인다.
 
 ## 표기법 및 데이터 설정
-$$U$$를 모든 user의 set, $$I$$를 모든 item의 set이라고 했을 때 implicit feedback은 $$S \subseteq$$ U \times I$$라고 정의하자.
+$$U$$를 모든 user의 set, $$I$$를 모든 item의 set이라고 했을 때 implicit feedback은 $$S \subseteq U \times I$$라고 정의하자.
 그리고 $$I$$에 속한 item들의 특정 feedback $$i, j$$ 값을 비교했을 때 $$i$$가 $$j$$보다 더 큰 경우 ***positive***, 작은 경우
 ***negative***, 같은 경우 ***missing value*** 라고 한다. (*이 세 가지로 모두 표현할 수 있다.*)
 아래 그림에 잘 나타나있다. 왼쪽 그림처럼 user에 매칭되는 item이 matrix 형태로 주어지고 $$+$$는 값이 있음, $$?$$는 값이 없음을 나타낸다.
