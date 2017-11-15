@@ -60,7 +60,7 @@ AUC score를 구하는 식과 $$\normalsize {\text{BPR-O}} \small {\text{PT}}$$�
 최적의 AUC score를 구할 수 있다는 결론을 얻을 수 있다고 한다. 수식은 생략한다.
 *찾다보니 AUC optimization가 많이 언급되는데 모델의 이게 무엇을 의미하는 지 모르겠다.*
 
-![BPR_figure2](https://whikwon.github.io/images/rec_bpr_learnbpr.png)rec_bpr_learnbpr.png
+![BPR_figure2](https://whikwon.github.io/images/rec_bpr_learnbpr.png)
 <center> <i> &lt;LearnBPR을 통해 학습했을 때의 AUC score 변화&gt;</i> </center> <br>
 
 ## BPR Learning 알고리즘
