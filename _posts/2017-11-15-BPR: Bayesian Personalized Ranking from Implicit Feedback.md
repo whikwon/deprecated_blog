@@ -25,7 +25,7 @@ $$U$$를 모든 user의 set, $$I$$를 모든 item의 set이라고 했을 때 imp
 <center> <i> &lt;pairwise 선호도를 결정하는 방법 소개&gt;</i> </center> <br>
 
 위 그림처럼 모든 user에 대해서 각 item의 다른 item들에 대한 선호도를 나타내면 우리가 학습 시에 사용할 데이터 $$D_S$$를 얻을 수 있다.
-$$D_S := {(u,i,j) \lvert i \in I_u^+ \wedge j \in I \texttt{\\} I_u^+}$
+$$D_S := {(u,i,j) \lvert i \in I_u^+ \wedge j \in I \texttt{\\} I_u^+}$$
 
 ## BPR 목적 함수
 우리가 구해야 할 것은 모든 item에 대한 개인화된 ranking이다. 이제 Bayes 정리로부터 어떻게 구할 수 있을지 살펴보자.
