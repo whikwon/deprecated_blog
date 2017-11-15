@@ -27,7 +27,7 @@ comments: true
 ## 모델 소개
 먼저 기존 목적 함수를 보면 latent factor로 user와 item의 특징을 나타내고 이 둘을 내적한 값을 예상 평점이라 하고 진짜 평점과의 차이를 최소화하는 방향으로
 학습한다. <br>
-<center> $$\underset {x_{\star}, y_{\star}} {min} \displaystyle \sum_{r_{u,i\ \text{is known}}} (r_{ui} - x_u^T y_i)^2 + \lambda (\lVert x_u \rVert^2 + \lVert y_i \rVert^2)$$ </center> <br>
+<center> $$\underset {x_{\star}, y_{\star}} {min} \displaystyle \sum_{r_{u,i\ \text{is known}}} (r_{ui} - x_u^T y_i)^2 + \lambda (\lVert x_u \rVert^2 + \lVert y_i \rVert^2)$$ </center> 
 <center> ($$r_{u,i}$$는 진짜 평점, $$x_u, y_i$$는 각각 latent factor로 이루어진 user, item vector이다.) </center>
 
 Implicit의 경우에는 평점이라는 개념이 없으므로 항을 약간 수정해야 한다. 먼저, 평점은 선호도($$p_{ui}$$)과 신뢰도($$c_{ui}$$)의 2개 항으로 나뉜다.
@@ -51,10 +51,12 @@ Implicit의 경우에는 평점이라는 개념이 없으므로 항을 약간 �
 <center> $$\underset {x_{\star}, y_{\star}} {min} \displaystyle \sum_{u, i} c_{ui}(p_{ui} - x_u^T y_i)^2 + \lambda (\sum_u \lVert x_u \rVert^2 + \sum_i \lVert y_i \rVert^2)$$ </center>
 
 위에서 정의한 목적 함수를 Alternating Least Squares(ALS)를 사용해서 학습시킨다. $$x_u, y_i$$에 대해 update하는 식은
+
 $$\begin{align} x_u &= (Y^T C^u Y + \lambda I)^{-1} Y^T C^u p(u) \\
 y_i &= (X^T C^i X + \lambda I)^{-1} X^T C^i p(i)
 \end{align}$$
-으로 자세한 유도는 [stackoverflow](https://math.stackexchange.com/questions/1072451/analytic-solution-for-matrix-factorization-using-alternating-least-squares/1073170#1073170)를 참조하자. 전체 $$m \times n$$의 matrix로 user-item 데이터가 이루어져 있다고 하고 각각의 user, item은 $$f$$개의 factor로 나타난다고 하자. $$mathcal{N}$$은 데이터 중 non-zero observation의 개수이다.
+
+으로 자세한 유도는 [stackoverflow](https://math.stackexchange.com/questions/1072451/analytic-solution-for-matrix-factorization-using-alternating-least-squares/1073170#1073170)를 참조하자. 전체 $$m \times n$$의 matrix로 user-item 데이터가 이루어져 있다고 하고 각각의 user, item은 $$f$$개의 factor로 나타난다고 하자. $$\mathcal{N}$$은 데이터 중 non-zero observation의 개수이다.
 그럼 ALS로 계산 시 총 연산량은 $$x_u, y_i$$에 대해 각각 $$O(f^2 \mathcal{N} + f^3 m), O(f^2 \mathcal{N} + f^3n)$$의 데이터의 size에 따라 linear한 연산량으로 계산이 가능하다.
 
 ## 정리
