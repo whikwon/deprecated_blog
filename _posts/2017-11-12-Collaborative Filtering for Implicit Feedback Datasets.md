@@ -26,9 +26,8 @@ comments: true
 
 ## 모델 소개
 먼저 기존 목적 함수를 보면 latent factor로 user와 item의 특징을 나타내고 이 둘을 내적한 값을 예상 평점이라 하고 진짜 평점과의 차이를 최소화하는 방향으로
-학습한다. <br>
-<center> $$\underset {x_{\star}, y_{\star}} {min} \displaystyle \sum_{r_{u,i\ \text{is known}}} (r_{ui} - x_u^T y_i)^2 + \lambda (\lVert x_u \rVert^2 + \lVert y_i \rVert^2)$$ </center> 
-<center> ($$r_{u,i}$$는 진짜 평점, $$x_u, y_i$$는 각각 latent factor로 이루어진 user, item vector이다.) </center>
+학습한다. 아래 식에서의 항은 $$r_{u,i}$$는 진짜 평점, $$x_u, y_i$$는 각각 latent factor로 이루어진 user, item vector이다.
+<center> $$\underset {x_{\star}, y_{\star}} {min} \displaystyle \sum_{r_{u,i\ \text{is known}}} (r_{ui} - x_u^T y_i)^2 + \lambda (\lVert x_u \rVert^2 + \lVert y_i \rVert^2)$$ </center>
 
 Implicit의 경우에는 평점이라는 개념이 없으므로 항을 약간 수정해야 한다. 먼저, 평점은 선호도($$p_{ui}$$)과 신뢰도($$c_{ui}$$)의 2개 항으로 나뉜다.
 두 항 모두 우리가 얻은 feedback($$r_{ui}$$)로 부터 결정된다. $$r_{ui}$$는 구매한 횟수, 마우스 클릭 수, 브라우저에 머문 시간 등을 나타낸다.
