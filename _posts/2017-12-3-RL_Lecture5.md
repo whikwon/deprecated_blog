@@ -53,7 +53,7 @@ policy iteration 과정을 그림으로 나타내면 아래와 같으며 state-v
 잘 되는 것을 확인할 수 있다.
 
 ![epsilon greedy theorem](https://whikwon.github.io/images/david_silver/epsilon_greedy_theorem.png)
-ㅇ
+
 ### 3) Monte-Carlo Policy Iteration
 위 내용들을(*action-value function, $$\epsilon$$-greedy*) 반영하면 아래와 같이 나타낼 수 있다. 여기서 policy evaluation에 대해
 생각해보면 value function을 얻기 위해서 너무 많은 episode들을 봐야 한다. 그냥 매 episode마다 policy evaluation을 하면 안 될까?
@@ -198,8 +198,8 @@ Q-learning도 수렴하는지 확인해야하고 아래 theorem에 따라서 opt
 ## 정리
 지금까지 배운 DP, TD에 관련된 내용을 Sampling 방식, Backup 방식에 따라서 정리해놓았다.
 
-![DP vs TD](https://whikwon.github.io/images/DP_vs_TD.png)
-![DP vs TD2](https://whikwon.github.io/images/DP_vs_TD2.png)
+![DP vs TD](https://whikwon.github.io/images/david_silver/DP_vs_TD.png)
+![DP vs TD2](https://whikwon.github.io/images/david_silver/DP_vs_TD2.png)
 
 
 Reference: <br>
