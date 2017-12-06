@@ -49,7 +49,7 @@ policy iteration 과정을 그림으로 나타내면 아래와 같으며 state-v
 
 ![epsilon greedy](https://whikwon.github.io/images/david_silver/epsilon_greedy.png)
 
-그럼, $$\epsilon$-greedy를 통해서도 policy improvement가 잘 되는지 확인 해야한다. 결론적으로 아래 theorem에 의해 policy improvement가
+그럼, $$\epsilon$$-greedy를 통해서도 policy improvement가 잘 되는지 확인 해야한다. 결론적으로 아래 theorem에 의해 policy improvement가
 잘 되는 것을 확인할 수 있다.
 
 ![epsilon greedy theorem](https://whikwon.github.io/images/david_silver/epsilon_greedy_theorem.png)
@@ -82,7 +82,7 @@ MC에는 GLIE를 적용해서 사용하는데 무한히 exploration 했을 때 $
 
 ### 1) MC vs TD Control
 앞 장에서 policy evaluation할 때 TD learning은 MC보다 장점이 많이 있다고 배웠다. variance가 낮고 online 학습이 가능하며 episode가 반드시 끝나지 않아도 된다는 점들이 있다.
-그럼 단순하게 생각해보면 policy evaluation 단계에서 MC를 TD로 바꿔서 하면 어떨까? 라고 생각할 수 있다. improvement는 그대로 $$\epsilon-greedy$$로 놔두고
+그럼 단순하게 생각해보면 policy evaluation 단계에서 MC를 TD로 바꿔서 하면 어떨까? 라고 생각할 수 있다. improvement는 그대로 $$\epsilon$$-greedy로 놔두고
 1-episode 당 update 되었던 MC를 1-time step으로 바꿔서 학습하면 되겠다. 이 생각대로 내용을 전개해보자.
 
 ### 2) Sarsa

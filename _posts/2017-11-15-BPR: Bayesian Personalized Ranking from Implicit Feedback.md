@@ -5,6 +5,7 @@ comments: true
 ---
 - Implicit Feedback을 학습시키는 방법인 BPR를 소개한다.
 
+***
 ## Introduction
 논문에서 BPR이라는 ranking을 학습하는 알고리즘을 소개한다. BPR을 통해 아래 사항들에 대해서 기여를 할 수 있다.
 1. 개인화된 ranking에 최적화된 optimization criterion(*목적 함수*)인 $$\normalsize {\text{BPR-O}} \small {\text{PT}}$$를 소개한다. $$\normalsize {\text{BPR-O}} \small {\text{PT}}$$가 AUC score의 최대화와 어떤 관련이 있는지 보일 예정이다.
@@ -13,6 +14,7 @@ $$\normalsize {\text{L}} \small {\text{EARN}} \normalsize {\text{BPR}}$$는 SGD�
 3. $$\normalsize {\text{L}} \small {\text{EARN}} \normalsize {\text{BPR}}$$를 kNN과 Matrix Factorization 모델에 어떻게 적용할 수 있는지 살펴본다.
 4. 개인화 ranking에서의 $$\text{BPR}$$의 성능이 기존 학습 방법 대비 좋다는 것을 보인다.
 
+***
 ## 표기법 및 데이터 설정
 $$U$$를 모든 user의 set, $$I$$를 모든 item의 set이라고 했을 때 implicit feedback은 $$S \subseteq U \times I$$라고 정의하자.
 그리고 $$I$$에 속한 item들의 특정 feedback $$i, j$$ 값을 비교했을 때 $$i$$가 $$j$$보다 더 큰 경우 ***positive***, 작은 경우
@@ -27,6 +29,7 @@ $$U$$를 모든 user의 set, $$I$$를 모든 item의 set이라고 했을 때 imp
 위 그림처럼 모든 user에 대해서 각 item의 다른 item들에 대한 선호도를 나타내면 우리가 학습 시에 사용할 데이터 $$D_S$$를 얻을 수 있다.
 $$D_S := {(u,i,j) \lvert i \in I_u^+ \wedge j \in I \texttt{\\} I_u^+}$$
 
+***
 ## BPR 목적 함수
 우리가 구해야 할 것은 모든 item에 대한 개인화된 ranking이다. 이제 Bayes 정리로부터 어떻게 구할 수 있을지 살펴보자.
 $$\Theta$$가 우리가 학습시킨 모델의 parameter를 나타낸다고 가정하면 Bayes 정리에 따라 $$p(\Theta \lvert >_u) \propto p(>_u \lvert \Theta) p(\Theta)$$
@@ -55,6 +58,7 @@ $$\begin{align}
 
 이대로 학습하면 개인화된 ranking에 최적화되게 학습할 수 있겠다.
 
+***
 ## AUC optimization과의 논리적인 관계
 AUC score를 구하는 식과 $$\normalsize {\text{BPR-O}} \small {\text{PT}}$$이 같은 논리를 가지고 있기 때문에 목적 함수를 학습시키면
 최적의 AUC score를 구할 수 있다는 결론을 얻을 수 있다고 한다. 수식은 생략한다.
@@ -63,6 +67,7 @@ AUC score를 구하는 식과 $$\normalsize {\text{BPR-O}} \small {\text{PT}}$$�
 ![BPR_figure2](https://whikwon.github.io/images/rec_bpr_learnbpr.png)
 <center> <i> &lt;LearnBPR을 통해 학습했을 때의 AUC score 변화&gt;</i> </center> <br>
 
+***
 ## BPR Learning 알고리즘
 위에서 목적 함수를 정의했으니 이제 학습 방법을 정해야 한다. 결론적으로 bootstrap sampling에 기반을 둔 SGD 알고리즘을 사용한다.
 full GD를 사용하지 않는 이유는 연산량 문제와 skewness 문제로 인해서 사용하지 않는다고 한다. SGD를 사용했을 때 이들 문제가 해결되지만
@@ -79,16 +84,19 @@ $$\begin{align}
 아직 모르는 내용이 하나 있다. 바로 $$\hat x_{uij}$$에 관한 내용이다. 이 부분은 앞서 간략하게 언급한 것처럼 kNN이나 MF와 같은 모델로부터 결정이
 되며 그로부터 해당하는 식을 구할 수 있다. MF에 대해서만 살펴보도록 하자.
 
+***
 ## Matrix Factorization으로 BPR 학습
 먼저 $$D_S$$에 속하는 $$(u,i,j)$$ 대해서 $$\hat x_{uij} = \hat x_{ui} - \hat x_{uj}$$가 성립한다고 놓는다.
 $$\hat x_{ui}, \hat x_{uj}$$는 특정 user의 특정 item에 대한 score의 예측 값이다. 즉, matrix factorization을 적용했을 때
 학습 방식이 있고 $$\hat x_{ui}$$를 나타낼 수 있으면 $$\hat x_{uij}$$도 나타낼 수 있어서 이제 $$\normalsize {\text{BPR-O}} \small {\text{PT}}$$
 학습하는 데에 문제가 없어진다.
 
+***
 ## 학습 결과
 마지막으로 학습 결과를 타 모델과 비교한 그래프이다. AUC score에서 BPR을 적용시킨 모델의 성능이 타 모델 대비 뛰어난 것을 확인할 수 있다.
 
-![BPR_figure2](https://whikwon.github.io/images/rec_bpr_result.png)rec_bpr_learnbpr.png
+![BPR_figure2](https://whikwon.github.io/images/rec_bpr_result.png)
+![BPR_figure2](https://whikwon.github.io/images/rec_bpr_learnbpr.png)
 <center> <i> &lt;BPR-모델 학습 결과&gt;</i> </center> <br>
 
 Reference: <br>
