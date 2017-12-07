@@ -50,7 +50,7 @@ object segmentation*** 에서 이미지를 다룰 때의 내용과 유사하여 
 Visual input module은 각기 다른 역할을 하는 3가지 구성요소로 이루어진다.
 ***local region feature extraction, visual feature, input fusion layer*** 로 구성되며 앞서 설명한 Text QA에서의
 구성요소와 거의 유사하다. 그림을 보면서 차례대로 살펴보자.
-![Visual input module](https://whikwon.github.io/imagesNLP_DMN+_Visual_input.png) <br>
+![Visual input module](https://whikwon.github.io/images/NLP_DMN+_Visual_input.png) <br>
 <center> <i> &lt;DMN+ Vision input module 구조&gt;</i> </center> <br>
 ***local region feature extraction*** 단계에서는 문자 그대로 이미지 내에 특정 위치에 해당하는 이미지 feature를 추출하는 작업을 수행한다.
 해당 논문에선 CNN 구조의 VGG 모델을 지나서 최종적으로 $$d\ =\ 512 \times 14 \times 14$$의 차원을 갖게 되고 여기에서

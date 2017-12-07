@@ -63,21 +63,9 @@ $$\begin{equation}
       0, & \text{if}\ k > \gamma
   \end{cases}
 \end{equation}$$ <br>
-최종적으로 MMI-antiLM의 목적 함수는 $$log\ p(T|S) - \lambda log\ U(T)$$로 나타낼 수 있다.
+최종적으로 MMI-antiLM의 목적 함수는 $$\log p(T|S) - \lambda \log U(T)$$로 나타낼 수 있다.
 
-2) MMI-bidi: $$(1 - \lambda)log\ p(T|S) + \lambda log\ p(S|T)$$, decoding을 intractable하게 만들 수 있다.
-
-
-
-## 이전 모델과의 비교
-
-## 데이터셋
-
-## 학습 조건
-
-## 평가 방법
-
-## 성능
+2) MMI-bidi: $$(1 - \lambda)\log p(T \lvert S) + \lambda \log p(S \lvert T)$$, decoding을 intractable하게 만들 수 있다.
 
 Reference: <br>
 Jiwei Li, Michel Galley, Chris Brockett, Jianfeng Gao, Bill Dolan. [A Diversity-Promoting Objective Function for Neural Conversation Models](https://arxiv.org/pdf/1510.03055). 2015.
