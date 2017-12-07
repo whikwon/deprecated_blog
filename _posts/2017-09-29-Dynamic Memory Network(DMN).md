@@ -20,21 +20,21 @@ QA는 되게 재밌는 주제라고 강의에서 소개하고 있다. 왜냐하�
 ![architecture](https://whikwon.github.io/images/NLP_DMN_architecture.png)<br>
 <center> <i> &lt;Dynamic Memory Network 구조&gt;</i> </center> <br>
 
-### 1) Input Module** <br>
+### 1) Input Module
 input은 질문에 답하기 위한 내용이 되는 본문쯤으로 보면 되겠다. 다른 모델들에서 했듯이 text를
 distributed vector representation로 encode를 해줘야하고 여기에선 RNN 계열인 GRU를 사용한다.
 본문에서 사용할 표기법은 문장들 $$T_I$$의 구성 단어를 $$w_1, ..., w_T$$라고 하고
 GRU를 통과한 hidden state를 $$h_t = GRU(L[w_t], h_{t-1})$$라고 한다. 여기서 $$L$$은 embedding matrix이며
 Glove로 구한 값을 사용한다.
 
-### 2) Question Module** <br>
+### 2) Question Module
 input module과 마찬가지로 question의 text를 encode해주면 된다. 이 때도 GRU를 사용한다.
 question 문장 $$T_Q$$의 단어들을 $$w_t^Q$$라 하고 GRU를 통과한 hidden state를 $$q_t = GRU(L[w_t^Q], q_{t-1})$$
 라고 한다. $$L$$은 input module에서 사용된 embedding matrix이다. input module과 약간 다른 점이 있다면
 input에서는 hidden state를 attention을 위해서 전부다 사용하지만 question에서는 마지막 hidden state값만
 활용한다는 차이점이 있다.
 
-### 3) Episodic Memory Network** <br>
+### 3) Episodic Memory Network
 episodic memory module은 여기서 처음 등장하는 개념인데 여러 층으로 이루어지며 각 층에는 input값에 매칭되는 episode값이 존재한다.
 episode $$e^i$$는 attention mechanism을 이용해서 생성되고 이 때, input값인 fact representation $$c$$와 question representation $$q$$와 이전 memory $$m^{i-1}$$를 참조한다.
 이렇게 만든 각 층의 episode는 해당 층의 memory를 만들 때 쓰이며 GRU를 사용한다. 최종적으로 마지막 episodic memory 층의 마지막 memory는
@@ -51,7 +51,7 @@ answer module로 전달된다.
 - Question : *Where is the football?* <br>
 - Answer : *living room* <br>
 
-#### Attention Mechanism** <br>
+#### Attention Mechanism
 Episodic Memory Network에서 사용되는 attention mechanism를 살펴보자. 이 후에 발전되는 모델들에서 바뀌는 부분이기도 하다.  
 논문에서 gating function이라고 하는 $$g_t^i$$를 구하고 이를 이용해서 우리의 목적인 episode를 생성해주면 된다.
 앞에서 설명했듯이 input, question, 이전 memory가 필요하므로 $$g_t^i = G(c_t, m^{i-1}, q)$$로 나타낼 수 있다.
@@ -64,7 +64,7 @@ $$G(c,m,q) = \sigma \bigg (W^{(2)} tanh \big ( W^{(1)} z(c,m,q) + b^{(1)} \big )
 $$\begin{align} h_t^i &= g_t^i GRU(c_t, h_{t-1}^i) + (1-g_t^i)h_{t-1}^i \\
 e^i &= h_{T_c}^i \end{align}$$
 
-### 4) Answer Module** <br>
+### 4) Answer Module
 Answer module은 우리가 하려는 task에 따라서(*task에 따라서 개별적으로 학습시켜줘야 한다. 일반적인 모델이긴 하지만 각각을 따로 할 수 있다는 거지 한 번
 학습시킨 모델이 모든 걸 할 수 있다는 뜻은 아니다.*) answer로 마지막 episodic memory값만 받거나 아니면 time step별로 받을 수도 있다.
 Answer module도 다른 module들과 마찬가지로 GRU를 사용하며 마지막 memory의 값 $$m^{T_M}$$을 initial state로 받아서 아래와 같이
@@ -96,7 +96,7 @@ DMN 구조의 핵심을 Episodic Memory Module로 보아도 무방하며 얼마�
 ![quantative analysis](https://whikwon.github.io/images/NLP_DMN_episodic_memory1.png)<br>
 <center> <i> &lt;Episodic Memory 정량적 평가 결과&gt;</i> </center> <br>
 
-### Qualitative Analysis of Episodic Memory Module
+## Qualitative Analysis of Episodic Memory Module
 이제 정성적인 분석이다. 위에서 본 결과 중에 Sentiment에 대해서 1 pass일 때와 2 pass일 때를 비교해서
 모델이 pass의 개수에 따라서 어떤 식으로 작동을 하는지 확인할 것이다. 확인 대상은 input 문장의 각각 단어에 대한
 attention 정보이다.
