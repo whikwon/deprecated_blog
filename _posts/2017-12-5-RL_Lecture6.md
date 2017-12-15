@@ -65,24 +65,26 @@ TD-target은 *biased* 하지만 MC에 비해 variance가 작은 특징이 있다
 TD($$\lambda$$)의 forward, backward view를 살펴보자. forward의 경우에는 전체를 다 본 뒤에 step 별로 가중치를 줘서 합친 값인 $$G_t^{\lambda}$$을 target으로
 supervised learning으로 value function을 학습시킨다.
 
-backward의 경우에는 현재의 상태에 영향을 미친 과거 상태의 빈도($$\mathbb{x}(S_t)$$)와 얼마나 최신 일인지에 대해 고려($$\gamma \lambda E_{t-1}$$)한 값을 target으로
+backward의 경우에는 현재의 상태에 영향을 미친 과거 상태의 빈도($$\textbf{x}(S_t)$$)와 얼마나 최신 일인지에 대해 고려($$\gamma \lambda E_{t-1}$$)한 값을 target으로
 supervised learning으로 value function을 학습시킨다.
 
 ![TD lambda value approximation](https://whikwon.github.io/images/david_silver/TD_lamb_value_approx.png)
 
+***
 ## Policy control with Value Function Approximation
 위에서 지금까지 살펴본 state-value function을 근사하는 일을 action-value function에 똑같이 적용시키면 Policy control 문제를 해결할 수 있다.
 evaluation 단계에서 action-value function을 구한 뒤 $$\epsilon$$ policy improvement를 하면 된다.
 
 ![policy control](https://whikwon.github.io/images/david_silver/policy_control.png)
 
-state-value에서 state에 관한 식이었지만 action에 대한 항도 추가해서 feature vector로 나타내주면 되고 $$\mathbb{w}$$에 대해 학습하면 된다.
+state-value에서 state에 관한 식이었지만 action에 대한 항도 추가해서 feature vector로 나타내주면 되고 $$\textbf{w}$$에 대해 학습하면 된다.
 학습 방법도 MC, TD, TD($$\lambda$$) 모두 동일한 내용이므로 넘어가도록 하자.
 
 ![q approximation](https://whikwon.github.io/images/david_silver/q_function_approx.png)
 ![q approximation](https://whikwon.github.io/images/david_silver/q_function_approx2.png)
 ![q approximation](https://whikwon.github.io/images/david_silver/q_function_approx3.png)
 
+***
 ## Bootstrap helps? Prediction Convergence?
 여러 가지 모델로 학습시켰을 때 실제로 bootstrap이 도움이 되는지에 대한 비교 결과이다. $$\lambda$$가 1일 때 MC(no bootstrap)인데
 실제 1에서 성능이 대체로 안 좋은 것을 확인할 수 있다. bootstrap은 대부분 도움이 되며 모델이나 환경에 따라 적절한 값을 찾는게 중요하다고 한다.
@@ -94,24 +96,27 @@ state-value에서 state에 관한 식이었지만 action에 대한 항도 추가
 
 ![convergence](https://whikwon.github.io/images/david_silver/convergence.png)
 
+***
 ## Gradient TD
 위에서 TD의 경우 bootstrap으로 인해서 많은 경우에 수렴이 보장되지 않는 것을 보았다. 이러한 수렴에 관한 문제를 해결하기 위해서 TD에서 항을 약간 변경한 gradient TD를 사용할 수 있다.
 자세한 내용은 설명하지 않고 넘어가므로 교재를 참고해서 정리하자.
 
 ![gradient TD](https://whikwon.github.io/images/david_silver/gradient_TD.png)
 
-## Control Convergence
+***
+## Control Convergencedavid_silver/
 prediction보다 control은 더 수렴에 대한 보장이 되지 않는다고 한다. 계속 value function이 개선되는 것이 아니라 좋아졌다 나빠졌다를 반복하는(chatter) 경향을 보인다고 한다.
 
 ![control convergence](https://whikwon.github.io/images/david_silver/control_convergence.png)
 
+***
 ## Batch Methods
 지금까지 gradient descent 방법을 통한 value function을 근사하는 예를 살펴보았다. 간단하게 experience를 sampling해서 gradient descent에 비례해서 update 시켜주는 방식인데 이렇게
 진행할 경우에 experience를 1회성으로 쓰고 다시 불러오기 때문에 비효율적이다. 그래서 조금 더 효율적으로 하기 위해서 experience를 왕창 뽑아서 batch(training data)를 만드는 것이 필요하고
 마찬가지로 gradient descent 방법으로 반복적으로 학습할 수 있게 된다.
 
 ### 1) Least Square prediction
-데이터만 $\mathcal{D}$로 많아졌지 위에서 본 MSE와 동일한 방법(Least squares)으로 value function을 학습시킨다. 이 때, 아래 식에서도 볼 수 있듯이 매 학습마다 **batch 전체** 를 사용한다.
+데이터만 $$\mathcal{D}$$로 많아졌지 위에서 본 MSE와 동일한 방법(Least squares)으로 value function을 학습시킨다. 이 때, 아래 식에서도 볼 수 있듯이 매 학습마다 **batch 전체** 를 사용한다.
 
 ![least square prediction](https://whikwon.github.io/images/david_silver/least_square_prediction.png)
 
@@ -145,7 +150,7 @@ action을 할 수 있도록 만들었다. 모든 조건들을 동등하게 학�
 
 ### 5) Linear Least Squares Prediction
 gradient descent 방법은 많은 iteration을 반복해야 원하는 optimal parameter를 찾을 수 있다. 그래서 regression에서의 normal equation과 같이
-직접 해를 찾는 방법을 고려해본다. 하지만 이 때 구해지는 running-time은 $O(N^3)$으로 incremental solution의 $O(N^2)$보다 커서 복잡한 문제에 대해서
+직접 해를 찾는 방법을 고려해본다. 하지만 이 때 구해지는 running-time은 $$O(N^3)$$으로 incremental solution의 $$O(N^2)$$보다 커서 복잡한 문제에 대해서
 사용하기 어려우며 장점은 몇몇 경우에 대해서 incremental solution보다 수렴이 보장된다는 점이다.
 
 MC, TD를 아래와 같이 식을 풀어서 바로 해를 구할 수 있다.
