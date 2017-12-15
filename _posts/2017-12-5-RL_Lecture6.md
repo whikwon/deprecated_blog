@@ -139,7 +139,7 @@ DQN에 experience replay가 fixed Q-targets와 함께 사용된다. 방법은 ag
 
 아래 표는 experience replay와 fixed Q-targets이 얼마나 효과적인지 보여주는 예시이다. 값들은 atari 게임을 학습시켰을 때의 점수이다.
 
-![DQN stabilize](https://whikwon.github.io/images/david_silver/DQN_stablize.png)
+![DQN stabilize](https://whikwon.github.io/images/david_silver/DQN_stabilize.png)
 
 ### 4) DQN in Atari
 아래는 DQN을 사용해서 비디오 게임인 Atari를 학습시킬 때 사용한 모델이다. CNN과 FC layer를 활용해서 화면의 이미지를 읽어서 state를 나타내고
