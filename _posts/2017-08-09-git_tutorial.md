@@ -78,10 +78,10 @@ comments: true
   - *commit id1*..*commit id2* : log1과 log2의 commit을 비교해서 나타내준다.  
 
 9. **git reset** :
-  - *loginfo* --hard : loginfo이 후의 버전을 삭제하고 해당 loginfo단계로 돌아간다.
-  - --hard : 현재 add, commit 등 상태를 다 없애버린다.(***자주 사용***)
+  - --hard *commit info*: *loginfo* 를 기준으로 이 후의 add, commit 등 상태를 다 없애버린다. risk가 있다.
 
-10. **git revert** : 스킵
+10. **git revert** : reset은 모든 log를 이 후 log에 대해서 다시 만들어줘야 하는 불편함이 있다. 그래서 내가 돌아가고 싶은 log와 현재 상태를 매칭해서 다른 점에 대해서만 원복을
+하는 방법이 revert이다.
 
 11. **git 명령어 --help** : 명령어에 해당되는 도움말 확인
 
@@ -120,6 +120,9 @@ untracked file에 대해서는 stash가 불가능하다. (새로 생성된 파�
 
 19. **git pull origin [master]** : 원격저장소의 내용을 로컬로 가져온다.
 
+20. **git tag** : version 관리하는 데에 사용한다. 종류에 상관없이 commit과 비슷한 용도로 사용할 수 있다.
+
+21. **git reflog** : git에서 수행한 모든 log가 뜬다.
 
 git commit 전에는 항상 git add가 와야한다. 파일 하나 하나에 대해서 선택적으로 변경사항에 대해
 commit해야 할 필요성이 있기 때문이다. (기존 버전 관리 시스템과 차별화된 점이라고 한다.)
