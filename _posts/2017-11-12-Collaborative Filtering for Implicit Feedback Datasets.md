@@ -1,17 +1,18 @@
 ---
 title:  "Collaborative Filtering for Implicit Feedback Datasets"
 date: 2017-11-12 00:00:00
+layout: post
+excerpt: Implicit Feedback에 Matrix Factorization을 적용한 논문이다. 학습 방법은 ALS를 사용하였다.
+categories: [Recommender System, Paper]
 comments: true
 ---
-
-- Implicit Feedback에 Matrix Factorization을 적용한 논문이다. 학습 방법은 ALS를 사용하였다.
+## 논문 내용
 
 전체적인 내용이 앞서 정리한 [논문](https://endymecy.gitbooks.io/spark-ml-source-analysis/content/%E6%8E%A8%E8%8D%90/papers/Matrix%20Factorization%20Techniques%20for%20Recommender%20Systems.pdf)
 의 내용과 많이 겹치며 explicit feedback 뿐 아니라 implicit feedback에도 성공적으로 적용한 내용을 주로 소개한다.
 
 겹치는 내용은 제외하고 핵심적인 사항들만 적도록 하겠다.
 
-***
 ## Implicit Feedback의 특징
 1. **Negative feedback이 없다.**: user가 item에 얼마나 관심을 줬는지에 따라 선호도가 있는지 없는지를 알 수 있다고 가정한다.
 그러므로 특정 item을 싫어한다는 feedback은 알 수 없다. 그래서 missing data에 대한 처리가 중요한데 이를
@@ -25,7 +26,6 @@ comments: true
 5. **데이터가 dense한 편이다.**: 엄청나게 많은 item 중 몇몇 개만 평가하는 explict에 비해 implicit은 더 많은 item들과 user가 상호작용을 하므로
 데이터가 dense한 matrix 형태를 지니게 된다.
 
-***
 ## 모델 소개
 먼저 기존 목적 함수를 보면 latent factor로 user와 item의 특징을 나타내고 이 둘을 내적한 값을 예상 평점이라 하고 진짜 평점과의 차이를 최소화하는 방향으로
 학습한다. 아래 식에서의 항은 $$r_{u,i}$$는 진짜 평점, $$x_u, y_i$$는 각각 latent factor로 이루어진 user, item vector이다.
@@ -60,7 +60,6 @@ y_i &= (X^T C^i X + \lambda I)^{-1} X^T C^i p(i)
 으로 자세한 유도는 [stackoverflow](https://math.stackexchange.com/questions/1072451/analytic-solution-for-matrix-factorization-using-alternating-least-squares/1073170#1073170)를 참조하자. 전체 $$m \times n$$의 matrix로 user-item 데이터가 이루어져 있다고 하고 각각의 user, item은 $$f$$개의 factor로 나타난다고 하자. $$\mathcal{N}$$은 데이터 중 non-zero observation의 개수이다.
 그럼 ALS로 계산 시 총 연산량은 $$x_u, y_i$$에 대해 각각 $$O(f^2 \mathcal{N} + f^3 m), O(f^2 \mathcal{N} + f^3n)$$의 데이터의 size에 따라 linear한 연산량으로 계산이 가능하다.
 
-***
 ## 정리
 implicit feedback에 matrix factorization을 적용하기 위해 선호도($$p_{ui}$$)와 신뢰도($$c_{ui}$$)를 도입해서 학습을 시키는 것이 이 모델의
 핵심이라고 할 수 있다.

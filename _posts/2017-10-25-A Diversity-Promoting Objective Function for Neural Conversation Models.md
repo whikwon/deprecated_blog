@@ -1,10 +1,11 @@
 ---
 title:  "A Diversity-Promoting Objective Function for Neural Conversation Models"
 date: 2017-10-25 00:00:00
+layout: post
+excerpt: response(응답)을 decode할 때 commonplace(일반적인)한 응답이 나오는 문제를 objective function을 수정함으로써 개선하는 논문이다.
+categories: [NLP, Paper]
 comments: true
 ---
-
-- response(응답)을 decode할 때 commonplace(일반적인)한 응답이 나오는 문제를 objective function을 수정함으로써 개선한다.
 
 ## 모델 소개
 Seq2Seq와 같은 Dialog system에서 일반적으로 학습에 사용하는 Maximum likelihood는 특성상 *"I don't know"* 와 같은 일반적인 응답을 많이 생성하는 경향이 있다.

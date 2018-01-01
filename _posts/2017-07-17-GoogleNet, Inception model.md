@@ -1,19 +1,17 @@
 ---
 title:  "GoogleNet, Inception model"
 date: 2017-07-17 00:00:00
+layout: post
+excerpt: "GoogleNet은 Google에서 발표한 2014년도에 ILSVRC에서 1등을 차지한 모델이다. 이 후에도 몇 가지 개선사항을 지속 추가된다."
+categories: [Computer Vision, Paper]
 comments: true
 ---
 
-- GoogleNet은 Google에서 발표한 2014년도에 ILSVRC에서 1등을 차지한 모델이다.  
-- 이 후 몇 가지 개선사항을 추가해서 발표한 inception 시리즈에 대해서는 업데이트 예정이다.
-
-***
-### 1. Introduction <br>
+## 1. Introduction
 핵심적으로 이 논문에서 언급하는 내용은 **inception layer** 의 도입으로 쌓이는 layer
 에 의한 computational budget 해결 및 mobile, embedded computing을 위한 모델 개발 필요성이다.
 
-***
-### 2. Related Work <br>
+## 2. Related Work
 *Despite of concerns that max-pooling layers result in loss of accurate spatial information*
 ResNet에 이어서 pooling의 한계점에 대해서 언급하고 있는데 이 부분은 현재 pooling에 대한
 trend를 확인한 후에 기록할 예정이다.
@@ -27,8 +25,7 @@ GoogleNet은 크게 2가지 연구에 영향을 받았다. 첫째는 neuroscienc
 뒷 부분에 R-CNN에 관련한 내용이 나오는데 image segmentation, detection에 대한 부분은 관련
 논문을 읽고 마저 정리할 예정이다.
 
-***
-### 3. Motivation and High Level Considerations <br>
+## 3. Motivation and High Level Considerations
 당시 trend는 neural network를 layer width, depth를 늘려 깊게 학습시키면 좋은 성능을 발휘하였다.
 근데 깊게 학습할 경우에 overfitting과 computation resource의 문제가 생기는데 이를 둘 다 해결하기
 위해서 sparsity의 도입이 필요하다고 얘기하고 있다.(이를 위한 FC → Convolution 대체 필요.)
@@ -38,8 +35,7 @@ GoogleNet은 크게 2가지 연구에 영향을 받았다. 첫째는 neuroscienc
 이를 해결하기 위해 sparsity는 결국 망 내의 연결을 줄이면서 세부적인 행렬 연산에서는 최대한 dense한 연산을 하도록 해야 하는데
 기존에는 convolution을 활용해서 filter-level sparsity를 얻을 수 있었고, 다음 단계에로 inception architectuure를 연구 중이다.
 
-***
-### 4. Architectural Details <br>
+## 4. Architectural Details
 *There will be a smaller number of more spatially spread out clusters that can be covered by convolutions
 over larger patches, and there will be a decreasing number of patches over larger and larger regions*
 위의 문제가 어떤 건지 제대로 이해가 안 된다. 위와 같은 patch-alignment 문제를 해결하기 위해 inception architecture
@@ -53,8 +49,7 @@ inception module을 도입했을 때 문제가 3x3, 5x5 convolution 연산량이
 둘째, 하나의 이미지 정보에 대해 여러 scale로 처리가 되고 합쳐져서 다음 단계에서 다양한 scale에 대한 feature를
 추출할 수 있다.
 
-***
-### 5. GoogleNet <br>
+## 5. GoogleNet
 GoogleNet의 상세한 구조, parameter수는 아래 표에 잘 나타나있다.
 ![table1](https://learningcarrot.files.wordpress.com/2015/11/googlenet-parameters.png) <br><br>
  #1X1, #3X3, #5X5, pool proj가 합쳐져서 inception layer output을 형성하게 되고 #3X3 reduce는 #3X3전에 1X1 convolution을
@@ -68,29 +63,23 @@ GoogleNet의 상세한 구조, parameter수는 아래 표에 잘 나타나있다
 구조를 참조하기 바란다. <br>
 ![Figure3](https://qph.ec.quoracdn.net/main-qimg-0ed62ffe5bea704d591887c768e2ca14) <br><br>
 
-***
-### 6. Training Methodology
+## 6. Training Methodology
 이것 저것 설명을 하고 있는데 명확하게 guide를 주는 건 없고 sampling을 이렇게 해라 정도만 나와 있다.
 
-***
-### 7. Result <br>
+## 7. Result
   - 같은 모델 7개를 sampling만 다르게 해서 학습시키고 ensemble하였다.
   - test시에 AlexNet보다 더 cropping을 많이 진행했다. 이미지 1개 당 144crop 사용.
   - multiple crop에 대한 softmax probabilities average로 prediction 진행하였다.
   아래 표는 classification 결과, crop수에 따른 성능 비교 결과이다.
   ![table2,3](http://img.blog.csdn.net/20160920104209399)
 
-***
 ### 8. Detection Challenge Results
-나중에 추가로 학습한 뒤에 채울 예정.
+정리 필요
 
-***
 ### 9. Conclusion
 *Approximating the expected optimal sparse structure by readily available dense building
 block is a viable method for improving neural networks for computer vision*
 다시 한번 spasity에 대한 강조를 하고 있다.
-
-
 
 Reference: <br>
 Szegedy, Christian, et al. ["Going deeper with convolutions." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition.](http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Szegedy_Going_Deeper_With_2015_CVPR_paper.pdf), 2015.

@@ -1,12 +1,12 @@
 ---
 title:  "Git tutorial"
 date: 2017-08-09 00:00:00
+layout: post
+excerpt: "생활코딩에서 지옥에서 온 Git 강의 내용을 정리하였다."
+categories: [Git]
 comments: true
 ---
 
-- 생활코딩에서 지옥에서 온 Git 강의 내용을 정리하였다.
-
-***
 ## 자주 사용하는 명령어 정리
 
 1. (master) **git branch** *branch1* <br>
@@ -37,7 +37,6 @@ comments: true
 7. (master) **git push -u origin** [master] <br>
 : 로컬 저장소의 내용을 온라인 저장소의 master에 업로드한다.
 
-***
 ## 수업 내용
 **Git Bash** : Windows에서 Linux 기반의 명령어를 사용할 수 있도록 해주는 프로그램이다.
   - ls -al : 현재 작업 폴더 내 파일 정보 확인 명령어
@@ -141,7 +140,6 @@ master를 기반으로 branch1를 만들었을 때 branch1을 commit하고 maste
 master도 바꾸고 branch도 바꾸면 recursive를 하게 된다.
 공통의 조상을 찾고 둘을 합치고 별도의 commit을 만든다.
 
-***
 ## Git의 원리
 
 1. **git add**

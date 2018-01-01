@@ -1,29 +1,67 @@
-# ----------- CONFIGURABLE START -----------
-title:            "whikwon's blog"
-description:      ""
-url:              https://whikwon.github.io # Site url, without a slash at the end.
-signoff:          "whikwon" # Your name
-facebook_appid:   # APP ID for like button, remove from /_includes/share.html if unwanted.
-google_analytics: # Set tracking, remove from /javascripts/basic.js if unwanted.
-share:            true # Turn on twitter and facebook share buttons
+#
+###################################
+# Site wide configuration
+####################################
+#
+title: Whikwon
+email: whikwon@gmail.com
+description:
+url: http://whikwon.github.io # the base hostname & protocol for your site
+keywords: ["Deep Learning", "Python"]
 
-links:
-  - name:         Posts
-    url:          /
-    external:     false
-  - name:         About me
-    url:          /about
-    external:     false
-# ------------ CONFIGURABLE END ------------
-markdown: kramdown
+#
+###################################
+# Jekyll configuration
+####################################
+#
+timezone:          Asia/Seoul
+markdown:          kramdown
+highlighter:       rouge
+excerpt_separator: <!--more-->
+permalink:         /articles/:year-:month/:title
 
-permalink: /posts/:title
-defaults:
-  - values:
-      layout: "default"
-      comments: true
+kramdown:
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  enable_coderay: false
 
-socialmedia:
-  facebook: whi.kwon
-
-disqus_shortname: whikwon-disqus-com-1
+#
+###################################
+# Site Owner configuration
+####################################
+#
+owner:
+  name: Whi Kwon
+  avatar: leonids-logo.png
+  job:
+  bio: 회사를 그만두고 딥러닝과 프로그래밍을 공부하고 있습니다.
+  email: whikwon@gmail.com
+  disqus-shortname: whikwon-disqus-com-1
+  twitter:  #username
+  facebook: whi.kwon #username
+  google:
+    plus: #username
+    analytics:
+    verify:
+    ad-client:
+    ad-slot:
+  bing-verify:
+  github: whikwon #username
+  stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
+  linkedin:  #username
+  xing: #username
+  instagram: #username
+  lastfm: #username
+  tumblr: #username
+  pinterest: #username
+  foursquare: #username
+  steam: #username
+  dribbble: #username
+  youtube: #username
+  soundcloud: #username
+  weibo: #username
+  flickr: #username
+  codepen: #username
+  telegram: #username

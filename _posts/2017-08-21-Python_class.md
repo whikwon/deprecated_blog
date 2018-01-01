@@ -1,10 +1,13 @@
 ---
-title:  "Python_class"
+title:  "Python class 이해하기"
 date: 2017-08-21 00:00:00
+layout: post
+excerpt: "Python의 Class에 대한 내용이다."
+categories: [Python, Code]
 comments: true
 ---
 
-Python의 class(클래스)에 대한 내용을 학습하기 위해ㅇㅇ [블로그](https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/)
+Python의 class(클래스)에 대한 내용을 학습하기 위해 [블로그](https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/)
 를 요약 및 번역하였다.
 
 ```python

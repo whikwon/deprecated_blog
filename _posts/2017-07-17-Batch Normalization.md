@@ -1,11 +1,12 @@
 ---
 title:  "Batch Normalization"
 date: 2017-07-17 00:00:00
+layout: post
+excerpt: "2015년 ICML에 발표된 논문으로 internal covariate shift 문제를 해결하는 Batch normalization에 관한 내용이다."
+categories: [Computer Vision, Paper]
 comments: true
 ---
-- 2015년 ICML 2015에 publish된 논문이다.
 
-***
 #### 1. introduction <br>
 Deep learning에서 모델을 학습시킬 때 parallelism의 효율성을 살리기 위해 training시
 batch 대신 Stochastic Gradient Descent(SGD)를 사용한다.
@@ -21,7 +22,6 @@ vanishing gradient에 의해 $$x$$가 saturated regime으로 이동하게 된다
 분포가 saturated regime으로 $$x$$의 차원이 이동해서 convergence에 느리게 도달하게 된다.
 그래서 이런 nonlinearity input의 분포를 안정되게 해줄 수 있으면 optimizer가 saturated regime에 빠질 일도
 드물 것이고 training도 빨라질 것이라는게 논문의 주된 내용이다.
-
 
 
 Reference: <br>

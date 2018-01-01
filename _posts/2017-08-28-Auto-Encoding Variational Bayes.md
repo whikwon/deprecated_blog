@@ -1,10 +1,11 @@
 ---
 title: Auto-Encoding Variational Bayes
 date: 2017-08-28 00:00:00
+layout: post
+excerpt: "GAN, FVBN과 함께 가장 인기가 많은 generative model인 VAE을 소개하는 논문이다."
+categories: [VAE, Generative model, Paper]
 comments: true
 ---
-
-- GAN, FVBN과 함께 가장 인기가 많은 generative model인 VAE을 소개하는 논문이다.
 
 ## Variational_Bayesian_methods란?
 

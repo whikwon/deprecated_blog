@@ -1,11 +1,11 @@
 ---
 title:  "Text Understanding with the Attention Sum Reader Network"
 date: 2017-10-23 00:00:00
+layout: post
+excerpt: Document(문서) 내용에 대한 Question(질문)의 Answer(답)를 찾는 모델이다. 기존 모델들에서 사용되는 구조들을 차용해서 단순한 방법으로 좋은 성능을 내었다.
+categories: [NLP, Paper]
 comments: true
 ---
-
-- Document(문서) 내용에 대한 Question(질문)의 Answer(답)를 찾는 모델이다.
-- 기존 모델들에서 사용되는 구조들을 차용해서 단순한 방법으로 좋은 성능을 내었다.
 
 ## 모델 목적
 **문서 내 단어 중** 어떤 단어가 질문의 답에 가까운 지 찾는다. 문서에 없는 단어를 유추하거나 새롭게 생성할 수는 없다.

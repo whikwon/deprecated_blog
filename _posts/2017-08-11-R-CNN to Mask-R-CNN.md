@@ -1,12 +1,15 @@
 ---
 title:  "R-CNN to Mask R-CNN"
 date: 2017-08-11 00:00:00
+layout: post
+excerpt: "Image Detection/Segmentation의 대표적인 모델인 R-CNN부터 Mask R-CNN까지의 흐름 정리 내용이다."
+categories: [Computer Vision, Image Detection, Paper]
 comments: true
 ---
 
-- image detection의 대표적인 모델인 R-CNN부터 Mask R-CNN까지의 흐름에 대해서 정리하도록 하겠다.
+## Image Detection/Segmentation
 
-먼저, image detection을 제외한 다른 vision 분야에서 연구되는 주제에 대해서 소개하도록 하겠다. <br>
+먼저, image classification을 제외한 다른 vision 분야에서 연구되는 주제에 대해서 소개하도록 하겠다. <br>
 방법에 따라 아래와 같이 4가지로 구분되어 나누어진다. <br>
 ![Vision tasks](https://whikwon.github.io/images/vision_tasks.PNG) <br> <br>
 1. Semantic Segmentation  <br>  
@@ -38,7 +41,7 @@ Mask-R-CNN이 최근에 나온 대표적인 모델이며 Region based method의 
 ***
 Object detection 분야가 어떻게 흘러왔는 지에 대표적인 모델을 중심으로 내용을 소개하도록 하겠다.
 
-### 1. R-CNN <br>
+## 1. R-CNN <br>
 
 CNN을 활용해서 image detection을 성공적으로 해낸 모델이다. 다음에 계속 소개할 모델들은 R-CNN의 구조를
 차용하고 발전시켰다.  <br>
@@ -77,7 +80,7 @@ Region proposal에 사용하는 selective search에 대한 설명은 다음 링�
 아래는 예시 그림이다.
 ![SS](https://cdn-images-1.medium.com/max/1600/1*ZQ03Ib84bYioFKoho5HnKg.png)
 
-### 2. Fast R-CNN
+## 2. Fast R-CNN
 
 R-CNN에서 가장 큰 문제는 training뿐 아니라 test시에 시간이 너무 오래걸린다는 점이다.(49초/VGG16)
 Fast R-CNN에서 위 문제에 대한 큰 부분을 해결하였으며 핵심 내용은 RoIpooing이다.(2.3초/VGG16)
@@ -111,7 +114,7 @@ RoIpooling을 통과한 vector가 classfier, bbox regression 각각에 대한 lo
 training 방법을 통해서 scale invariance를 얻을 수 있지만 메모리를 크게 잡아먹어 어려움이 있다고 한다.
 Faster R-CNN에서 이를 다른 방법으로 접근해서 해결하는데 뒤에서 보도록 하겠다.
 
-### 3. Faster R-CNN
+## 3. Faster R-CNN
 
 앞선 모델들의 많은 개선을 통해 detection 속도가 빨라지긴 했으나 실시간으로 사용하기에 2.3초는 충분히 빠르진 않다. <br>
 Fast R-CNN에서 SS이후에 가장 큰 bottleneck을 RoIpooling으로 해결했다고 하면 이제 실시간 detection을 위해 SS에
@@ -172,8 +175,8 @@ object의 가운데에 초점이 맞춰지면 이를 중심으로 bbox의 크기
 상세한 다른 모델과의 평가 결과는 논문을 참조하도록 하자. <br>
 아무튼 Faster R-CNN의 의의는 RPN을 도입해서 실시간 object detection을 가능한 정도의 속도로 향상시켰다는 점이다.
 
-### 4. Mask R-CNN
-
+## 4. Mask R-CNN
+정리 필요.
 
 Reference:  <br>
 1. selective searach image : https://www.koen.me/research/pub/uijlings-ijcv2013-draft.pdf

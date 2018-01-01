@@ -1,11 +1,11 @@
 ---
 title: NMT by jointly learning to align and translate
 date: 2017-09-05 00:00:00
+layout: post
+excerpt: "NMT에 Seq2seq + Attention mechanism을 활용한 모델에 대한 논문이다."
+categories: [NLP, Paper]
 comments: true
 ---
-
-- NMT에 Attention mechanism을 활용한 모델이다.
-
 ## Introduction
 
 *Neural machine translation* 는 주로 *encoder-decoder* 구조로 이루어져 있으며 encoder는

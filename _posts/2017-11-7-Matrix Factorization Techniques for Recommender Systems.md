@@ -1,12 +1,11 @@
 ---
 title:  "Matrix Factorization Techniques for Recommender Systems"
 date: 2017-11-7 00:00:00
+layout: post
+excerpt: 추천 시스템 분야에서 널리쓰이는 Matrix Factorization(MF)에 대해 전반적으로 소개하는 2009년 Yehuda Koren의 논문이다.
+categories: [Recommender System, Paper]
 comments: true
 ---
-
-- 추천 시스템 분야에서 널리쓰이는 Matrix Factorization(MF)에 대해 전반적으로 소개하는 2009년 논문이다.
-- Yehuda Koren님이 작성하셨으며 추천 시스템 분야에서 매우 유명한 분이다.
-- 작성된지 꽤 오래되어 현재는 어떤 알고리즘을 많이 사용하고 있는지 조사가 필요하다.
 
 ## 추천 시스템 전략
 추천 시스템에 사용하는 접근법은 크게 2가지로 content filtering과 collaborative filtering이 있다.

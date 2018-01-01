@@ -1,21 +1,21 @@
 ---
-title:  "RL_Lecture5: Model-Free Control"
+title: "RL_Lecture5: Model-Free Control"
 date: 2017-12-5 00:00:00
+layout: post
+excerpt: David Silver의 Reinforcement Learning 5강을 정리한 내용이다.
+categories: [Reinforcement Learning, Lecture]
 comments: true
 ---
-
-- David Silver의 Reinforcement Learning 5강을 정리한 내용이다.
+## 강의 내용
 
 이번 장은 MDP가 주어지지 않았을 때(*model-free*) 어떤 방식으로 문제를 해결할 지에 대해 다룬다. 앞 장에서 Policy evaluation에 대한 내용인 Prediction을 다루었고
 이번 장에서는 Policy improvement에 대한 내용인 Control에 관해 다룬다. 4강과 마찬가지로 크게 Monte-Carlo 와 Temporal-Difference learning을 배우고 On-policy와
 Off-policy의 차이점을 배우는 것이 목표이다.
 
-***
 ### Model-Free Control?
 엘리베이터, 로보컵 축구, 바둑, 헬리콥터, 바이오리액터 등 많은 것들이 MDP로 모델링될 수 있다. 근데 현실 세계의 대부분 문제들은 MDP model을 모르거나 알지만 너무 크다는 문제점이 있다.
 이런 경우에 전체 state, action을 다 아는 상태로 문제를 푸는 것보다 더 효율적으로 sampling을 통해 푸는 방법을 찾아야 하는데 ***Model-free control*** 접근해서 풀 수 있다.
 
-***
 ### On, Off-Policy Learning?
 On-policy learning은 "Learn on the job", $$\pi$$로부터 sampling된 경험으로부터 $$\pi$$에 대한 policy를 배우는 과정이다. <br>
 Off-policy learning은 "Look over someones's shoulder", $$\mu$$로부터 sampling된 경험으로부터 $$\pi$$ 대한 policy를 배운 과정이다.
@@ -25,7 +25,6 @@ Off-policy가 필요한 이유는 원하는 policy의 경험을 실제로 얻기
 오랜 세월이 걸릴 것이다. 대신 다른 경험으로부터 로봇이 배울 수 있다면(simulation) 훨씬 편하게 학습할 수 있을 것이다. 이런 이유로 필요한게 Off-policy method이며
 자세한 내용은 아래에서 다룬다.
 
-***
 ## On-Policy Monte-Carlo Control
 
 ### 1) Policy Iteration Using Action-Value Function
@@ -77,7 +76,6 @@ MC에는 GLIE를 적용해서 사용하는데 무한히 exploration 했을 때 $
 
 ![MC blackjack](https://whikwon.github.io/images/david_silver/MC_blackjack.png)
 
-***
 ## On-Policy Temporal-Difference Learning
 
 ### 1) MC vs TD Control
@@ -138,7 +136,6 @@ backward에 대한 설명이다. ***eligibility trace*** 를 사용해서 과거
 
 ![windy gridworld](https://whikwon.github.io/images/david_silver/windy_grid_sarsa.png)
 
-***
 ## Off-Policy Learning
 학습 시에 target policy와 behavior policy가 다른 과정을 **Off-Policy Learning** 이라고 한다. 중요한 이유는 아래와 같다.
 - 다른 agent의 policy를 통해서 배울 수 있다.
@@ -165,7 +162,6 @@ variance를 낮추기 위해서 TD에 적용도 가능하며 동일하게 bootst
 
 ![importance sampling MC](https://whikwon.github.io/images/david_silver/importance_sampling_TD.png)
 
-***
 ### 2) Q-Learning
 Off-policy를 위해 사용되는 다른 방법인 Q-learning을 소개한다. (*importance sampling과 비교해서 어떤 점이 좋고 나쁜지는 확인이 필요하다.*)
 기존 TD와 비교했을 때 되게 직관적으로 behavior, target policy를 고려해서 항을 변경해준다. 아래 식을 보면 실제 다음 action에 대해서는 $$\mu$$
@@ -194,7 +190,6 @@ Q-learning도 수렴하는지 확인해야하고 아래 theorem에 따라서 opt
 
 ![cliff walking](https://whikwon.github.io/images/david_silver/cliff_walking.png)
 
-***
 ## 정리
 지금까지 배운 DP, TD에 관련된 내용을 Sampling 방식, Backup 방식에 따라서 정리해놓았다.
 

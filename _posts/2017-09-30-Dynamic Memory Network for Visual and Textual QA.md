@@ -1,11 +1,13 @@
 ---
 title:  "Dynamic Memory Network for Visual and textual Question Answering"
 date: 2017-09-30 00:00:00
+layout: post
+excerpt: DMN 모델의 몇몇 부분을 개선하고 앞서 text에 대한 QA를 이미지에도 적용시켰을 때 작동하는 것을 보여주는 논문이다.
+categories: [NLP, Paper, Computer Vision]
 comments: true
 ---
 
-- Stanford 16강에 해당하는 내용인 QA(Question Answering) 관련 최신 논문들을 순서대로 정리하도록 하겠다.
-- 앞서 살펴본 DMN 모델의 몇몇 부분을 개선하고 앞서 text에 대한 QA를 이미지에도 적용시켰을 때 작동하는 것을 보여준다.
+- Stanford 16강에 해당하는 내용인 QA(Question Answering) 관련 최신 논문이다.
 
 ## Introduction
 GRU를 이용한 DMN을 앞선 논문에서 살펴보았고 기존에 input module을 대신해서 이미지를 받을 수 있는

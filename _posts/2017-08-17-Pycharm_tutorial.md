@@ -1,6 +1,9 @@
-  ---
-title:  "Pycharm_tutorial"
+---
+title:  "Pycharm tutorial"
 date: 2017-08-16 00:00:00
+layout: post
+excerpt: "Python에서 가장 많이 사용하는 IDE인 Pycharm의 유용성, 단축키 정리이다."
+categories: [Python, IDE]
 comments: true
 ---
 

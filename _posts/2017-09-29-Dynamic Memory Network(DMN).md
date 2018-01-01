@@ -1,11 +1,11 @@
 ---
 title:  "Dynamic Memory Network for Natural Language Processing"
 date: 2017-09-29 00:00:00
+layout: post
+excerpt: 여러가지 상황에 대한 QA를 가능하게 만든 Dynamic Memory Network 모델에 관한 논문이다.
+categories: [NLP, Paper, Computer Vision]
 comments: true
 ---
-
-- Stanford 16강에 해당하는 내용인 QA(Question Answering) 관련 최신 논문들을 순서대로 정리하도록 하겠다.
-- 먼저, 여러가지 상황에 대한 QA를 가능하게 만든 Dynamic Memory Network 모델을 보도록 하자.
 
 ## Introduction
 

@@ -1,10 +1,11 @@
 ---
 title:  "Multiresolution Recurrent Neural Networks"
 date: 2017-10-24 00:00:00
+layout: post
+excerpt: 학습하기 어려운 coarse token을 따로 빼서 natural language token과 따로 학습을 시킨 뒤 합치는 과정을 통해 성능을 개선하는 논문이다.
+categories: [NLP, Paper]
 comments: true
 ---
-
-- 학습하기 어려운 coarse token을 따로 빼서 natural language token과 따로 학습을 시킨 뒤 합치는 과정을 통해 성능을 개선한다.
 
 ## 모델 목적
 1. 여러 개의 input을 넣어서 output을 생성하는 모델을 구축하는 것.
